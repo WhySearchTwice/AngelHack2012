@@ -9,7 +9,7 @@ var pages = {};
 /* Initialize */
 (function() {
     fetchData();
-    pages = testGet();
+    testGet();
 })();
 
 $.fn.createChild = function(data) {
@@ -61,6 +61,6 @@ function testGet() {
         url: '../static/sampledata/simplereddit.json',
         dataType : 'json'
     }).complete(function(data) {
-       return data;
+       pages = data;
     });
 }
