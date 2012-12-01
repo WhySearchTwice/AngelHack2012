@@ -9,6 +9,7 @@ var pages = {};
 /* Initialize */
 (function() {
     fetchData();
+    pages = testGet();
 })();
 
 $.fn.createChild = function(data) {
