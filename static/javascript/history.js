@@ -9,7 +9,8 @@ var pages = {};
 /* Initialize */
 (function() {
     fetchData();
-    pages = testGet();
+    testGet();
+    console.log(pages);
 })();
 
 $.fn.createChild = function(data) {
@@ -58,9 +59,9 @@ function get(email) {
 function testGet() {
     $.ajax({
         type: 'GET',
-        url: '../static/sampledata/simplereddit.json',
+        url: '/static/sampledata/simplereddit.json',
         dataType : 'json'
     }).complete(function(data) {
-       return data;
+       pages = data;
     });
 }
