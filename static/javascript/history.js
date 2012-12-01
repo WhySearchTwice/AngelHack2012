@@ -59,9 +59,14 @@ function get(email) {
 function testGet() {
     $.ajax({
         type: 'GET',
-        url: '/static/sampledata/simpleReddit.json',
+        url: '/static/sampleData/simpleReddit.json',
         dataType : 'json'
-    }).complete(function(data) {
-       pages = data;
-    });
+    })
+        .success(function(data) {
+           pages = data;
+        })
+        .error(function(data) {
+            console.error(data);
+        })
+    ;
 }
