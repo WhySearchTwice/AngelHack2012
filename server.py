@@ -1,5 +1,5 @@
 #Imports
-from flask import Flask, redirect, request, sesison, render_template
+from flask import Flask, redirect, request, session, render_template
 import json
 
 # Define some awesome vars
