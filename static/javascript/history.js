@@ -59,7 +59,7 @@ function get(email) {
 function testGet() {
     $.ajax({
         type: 'GET',
-        url: '/static/sampledata/simplereddit.json',
+        url: '/static/sampledata/simpleReddit.json',
         dataType : 'json'
     }).complete(function(data) {
        pages = data;
