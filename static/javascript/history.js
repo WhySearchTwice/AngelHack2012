@@ -38,3 +38,28 @@ function treeGetWindow(id) {
 function treeGetTab(id) {
     if (!this.contains(id)) { console.error('Window ID does not exist'); }
 }
+
+/**
+ * Method for retrieving JSON from server.
+ * @Param: String email
+ */
+function get(email) {
+    var request = $.ajax({
+        type: 'GET',
+        url: 'http://ec2-174-129-49-253.compute-1.amazonaws.com/user/'+email+'.com',
+        dataType : 'jsonp'
+    });
+}
+
+/**
+ * Test method for getting static JSON from server.
+ */
+function testGet() {
+    $.ajax({
+        type: 'GET',
+        url: '../static/sampledata/simplereddit.json',
+        dataType : 'json'
+    }).complete(function(data) {
+       return data;
+    });
+}
