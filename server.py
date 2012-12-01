@@ -19,7 +19,7 @@ def timeline():
 
 @app.route('/update')
 def update():
-    call(["git pull"])
+    call(["git", "pull"])
     return "Site updating... please wait just a few seconds. </br> (This page will not update)"
 
 
