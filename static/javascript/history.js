@@ -99,7 +99,7 @@ function parseData() {
                 obj.attrs.push('tabId');
             }
             $('#timeline').addBranch(obj);
-        } else if ($('[windowid="num_' + obj.windowId + '"] [tabid="num_' + obj.tabId + '"]').length == 0) {
+        } else if ($('[windowid="num_' + obj.windowId + '"] [tabid="num_' + obj.tabId + '"], [windowid="num_' + obj.windowId + '"][tabid="num_' + obj.tabId + '"]').length == 0) {
             obj.attrs = ['tabId'];
             $('[windowid="num_' + obj.windowId + '"]').addBranch(obj);
         } else {
