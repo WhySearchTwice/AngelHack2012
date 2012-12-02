@@ -65,7 +65,7 @@ function parseData() {
  * @Return: Object device object or null if it does not exist
  */
 function treeGetDevice(deviceGuid) {
-    return this.tree[deviceGuid] || null;
+    return this.tree.devices[deviceGuid] || null;
 }
 
 /**
@@ -80,7 +80,7 @@ function treeGetWindow(deviceGuid, windowId) {
         return null;
     }
 
-    return this.tree[deviceGuid].windows[windowId] || null;
+    return this.tree.devices[deviceGuid].windows[windowId] || null;
 }
 
 /**
@@ -101,7 +101,7 @@ function treeGetTab(deviceGuid, windowId, tabId) {
         return null;
     }
 
-    return this.tree[deviceGuid].windows[windowId].tabs[tabId] || null;
+    return this.tree.devices[deviceGuid].windows[windowId].tabs[tabId] || null;
 }
 
 /**
