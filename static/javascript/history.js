@@ -306,6 +306,7 @@ function createSvgNode(obj) {
     var link = document.createElementNS("http://www.w3.org/2000/svg", "a");
     var textNode = document.createElementNS("http://www.w3.org/2000/svg", "text");
     link.setAttribute('xlink:href', obj.pageUrl);
+    link.setAttribute('target', '_top');
     textNode.setAttributeNS("http://www.w3.org/XML/1998/namespace", "xml:space","preserve");
     textNode.setAttribute("y", "20");
     textNode.setAttribute("x", "10");
