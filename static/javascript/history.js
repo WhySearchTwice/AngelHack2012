@@ -346,7 +346,7 @@ function createSVGTooltip(obj, x, y) {
     var minutes = date.getMinutes();
     var seconds = date.getSeconds();
     var formattedTime = hours + ':' + minutes + ':' + seconds;
-    var myText = document.createTextNode(obj.pageUrl + ' on formattedTime');
+    var myText = document.createTextNode(obj.pageUrl + ' on 'formattedTime);
     tspan.appendChild(myText);
     textNode.appendChild(tspan);
     newNode.appendChild(newNodeRect);
