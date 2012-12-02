@@ -261,7 +261,6 @@ function createSvgNode(obj) {
     newNodeMask.setAttribute("y", obj.y);
     newNodeMask.setAttribute("width", obj.width);
     newNodeMask.setAttribute("height", "50");
-    newNodeMask.setAttribute("id", "50");
     newNode.appendChild(newNodeMask);
 
     // Create the Rectangle
