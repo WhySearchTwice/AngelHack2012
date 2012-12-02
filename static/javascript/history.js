@@ -10,7 +10,6 @@ var pages = {};
 (function() {
     fetchData();
     testGet();
-    parseData();
 })();
 
 $.fn.createChild = function(data) {
@@ -65,7 +64,7 @@ function parseData() {
  * @Return: Object device object or null if it does not exist
  */
 function treeGetDevice(deviceGuid) {
-    return this.tree.devices[deviceGuid] || null;
+    return this.devices[deviceGuid] || null;
 }
 
 /**
@@ -75,12 +74,12 @@ function treeGetDevice(deviceGuid) {
  * @Return: Object window object or null if it does not exist
  */
 function treeGetWindow(deviceGuid, windowId) {
-    if (this.tree.getDevice(deviceGuid) == null) {
+    if (this.getDevice(deviceGuid) == null) {
         console.error('Device GUID does not exist');
         return null;
     }
 
-    return this.tree.devices[deviceGuid].windows[windowId] || null;
+    return this.devices[deviceGuid].windows[windowId] || null;
 }
 
 /**
@@ -91,17 +90,17 @@ function treeGetWindow(deviceGuid, windowId) {
  * @Return: Object tab object or null if it does not exist
  */
 function treeGetTab(deviceGuid, windowId, tabId) {
-    if (this.tree.getDevice(deviceGuid) == null) {
+    if (this.getDevice(deviceGuid) == null) {
         console.error('Device GUID does not exist');
         return null;
     }
 
-    if (this.tree.getWindow(windowId) == null) {
+    if (this.getWindow(windowId) == null) {
         console.error('Window does not exist');
         return null;
     }
 
-    return this.tree.devices[deviceGuid].windows[windowId].tabs[tabId] || null;
+    return this.devices[deviceGuid].windows[windowId].tabs[tabId] || null;
 }
 
 /**
@@ -127,6 +126,7 @@ function testGet() {
     })
         .success(function(data) {
            pages = data;
+           parseData();
         })
         .error(function(data) {
             console.error(data);
