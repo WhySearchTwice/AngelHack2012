@@ -149,7 +149,7 @@ function drawObjSvg(obj) {
     // If the device group is null, create it
     if(deviceGroup == null) {
         deviceGroup = document.createElementNS("http://www.w3.org/2000/svg", "g");
-        deviceGroup.setAttribute("id", windowGroupId);
+        deviceGroup.setAttribute("id", deviceGroupId);
         document.getElementById("svgContainer").appendChild(deviceGroup);
     }
 
