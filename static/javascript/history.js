@@ -26,7 +26,7 @@ function fetchData() {
 
 function parseData() {
     for(var objId in pages) {
-        var obj = pages[objId];
+        var obj = pages[objId].value;
 
         // Ensure device exists
         console.log("Retrieving device");
