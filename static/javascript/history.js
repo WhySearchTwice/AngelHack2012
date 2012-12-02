@@ -68,8 +68,8 @@ function parseData() {
         if(tab == null) {
             window.tabs[obj.tabId] = {pages: {}};
             tab = tree.getTab(obj.deviceGuid, obj.windowId, obj.tabId);
-            tab.yOffset = window.maxYOffset + 60; // Used when stacking tabs within the window
-            window.maxYOffset += 60;
+            tab.yOffset = window.maxYOffset + 40; // Used when stacking tabs within the window
+            window.maxYOffset += 40;
         }
 
         // Create the page in the tab
@@ -250,7 +250,7 @@ function drawPathBetweenNodes(parent, child, windowGroup, mode) {
     } else {
         // A child node
         x1 = parent.x;
-        y1 = parent.y + 50;
+        y1 = parent.y + 40;
 
         x2 = child.x;
         y2 = child.y + 25;
@@ -271,7 +271,7 @@ function drawPathBetweenNodes(parent, child, windowGroup, mode) {
 
 /**
  * Create an SVG object that contains a rectangle and text for a page node
- * @Param: Tree object to be drawn  
+ * @Param: Tree object to be drawn
  * @Return: SVG Element
  * @Author: Tony Grosinger
  */
@@ -295,14 +295,15 @@ function createSvgNode(obj) {
     // Create the Rectangle
     var newNodeRect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
     newNodeRect.setAttribute("width", obj.width);
-    newNodeRect.setAttribute("height", '50');
+    newNodeRect.setAttribute("height", '30');
     newNode.appendChild(newNodeRect);
 
     // Create the Text
     var textNode = document.createElementNS("http://www.w3.org/2000/svg", "text");
     var tspan = document.createElementNS("http://www.w3.org/2000/svg", "tspan");
     textNode.setAttributeNS("http://www.w3.org/XML/1998/namespace", "xml:space","preserve");
-    textNode.setAttribute("y", "30");
+    textNode.setAttribute("y", "20");
+    textNode.setAttribute("x", "10");
     textNode.setAttribute("style", "clip-path: url(#mask_" + obj.deviceGuid + "_" + obj.windowId + "_" + obj.tabId + "_" + obj.pageOpenTime + ");");
     var myText = document.createTextNode(obj.pageUrl);
     tspan.appendChild(myText);
