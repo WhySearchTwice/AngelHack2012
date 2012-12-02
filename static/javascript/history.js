@@ -167,7 +167,7 @@ function drawObjSvg(obj) {
     }
     if(!containsTabGroup) {
         windowGroup.appendChild(tabGroup);
-        tabGroup.setAttribute("transform", "translate(0,50)");
+        tabGroup.setAttribute("transform", "translate(0," + 50 * windowGroup.childNodes.length + ")");
     }
 
 
