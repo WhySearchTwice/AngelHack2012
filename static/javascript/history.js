@@ -160,7 +160,7 @@ function drawObjSvg(obj) {
     var containsTabGroup = false;
     for(var index in windowGroup.childNodes) {
         var childNode = windowGroup.childNodes[index];
-        if childNode.id == tabGroupId {
+        if (childNode.id == tabGroupId) {
             containsTabGroup = true;
             break;
         }
