@@ -342,8 +342,13 @@ function createSVGTooltip(obj) {
     textNode.appendChild(tspan);
     newNode.appendChild(newNodeRect);
     newNode.appendChild(textNode);
+<<<<<<< HEAD
+    $("group_" + obj.deviceGuid + "_" + obj.windowId + "_" + obj.tabId + "_" + obj.pageOpenTime).append(newNode);
+    console.log("got here");
+=======
     console.log($("group_" + obj.deviceGuid + "_" + obj.windowId + "_" + obj.tabId + "_" + obj.pageOpenTime));
     $("group_" + obj.deviceGuid + "_" + obj.windowId + "_" + obj.tabId + "_" + obj.pageOpenTime).append(newNode);
+>>>>>>> 33f60fefc898baed6513a12379cd4d262f63c7fe
 }
 
 /**
