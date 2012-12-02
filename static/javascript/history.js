@@ -93,16 +93,16 @@ function parseData() {
         var pageId = ids[obj.deviceGuid + obj.windowId + obj.tabId + obj.pageOpenTime] = view.idCounter;
         view.idCounter++;
 
-        if ($('[windowid="num_' + obj.windowId + '"]').length == 0) {
-            obj.attrs = ['windowid'];
+        if ($('[windowId="num_' + obj.windowId + '"]').length == 0) {
+            obj.attrs = ['windowId'];
             $('#timeline').addBranch(obj);
-        } else if ($('[tabid="num_' + obj.tabId + '"]') == 0) {
-            obj.attrs = ['tabid'];
-            $('[windowid="num_' + obj.windowId + '"]').addBranch(obj);
+        } else if ($('[tabId="num_' + obj.tabId + '"]') == 0) {
+            obj.attrs = ['tabId'];
+            $('[windowId="num_' + obj.windowId + '"]').addBranch(obj);
         } else {
-            $('[tabid="num_' + obj.tabId + '"]').addStem(obj);
+            $('[tabId="num_' + obj.tabId + '"]').addStem(obj);
         }
-        $('[windowid="num_' + obj.windowId + '"] [tabid="num_' + obj.tabId + '"] .branch').moveInto($('#page_' + pageId));
+        $('[windowId="num_' + obj.windowId + '"] [tabId="num_' + obj.tabId + '"] .branch').moveInto($('#page_' + pageId));
 
     }
 
