@@ -5,7 +5,7 @@
         "value":{
             "deviceGuid":"46c1c086-2ee4-11e2-ab68-12313d0174ac",
             "pageUrl":"https://mail.google.com",
-            "title": "Google Mail",
+            "title": "Gmail",
             "userId":"tony@grosinger.net",
             "pageOpenTime":1352957092099,
             "tabId":1022,
@@ -65,7 +65,7 @@
         "value":{
             "deviceGuid":"46c1c086-2ee4-11e2-ab68-12313d0174ac",
             "pageUrl":"http://cliffmass.blogspot.com.ar/2012/11/triple-rainbow.html",
-            "title": "Triple Rainbow",
+            "title": "Triple Rainbow | cliffmass",
             "userId":"tony@grosinger.net",
             "pageOpenTime":1352957192099,
             "tabId":1026,
@@ -81,7 +81,7 @@
         "value":{
             "deviceGuid":"46c1c086-2ee4-11e2-ab68-12313d0174ac",
             "pageUrl":" http://sivers.org/local",
-            "title": "You don't have to be local",
+            "title": "You don't have to be local | sivers",
             "userId":"tony@grosinger.net",
             "pageOpenTime":1352957192099,
             "tabId":1027,
@@ -97,7 +97,7 @@
         "value":{
             "deviceGuid":"46c1c086-2ee4-11e2-ab68-12313d0174ac",
             "pageUrl":"http://blog.fogus.me/2009/03/11/seven-books/",
-            "title": "The 7 Books of a Highly Effective Programmer",
+            "title": "The 7 Books of a Highly Effective Programmer | fogus.me",
             "userId":"tony@grosinger.net",
             "pageOpenTime":1352957192099,
             "tabId":1028,
@@ -128,7 +128,7 @@
         "value":{
             "deviceGuid":"46c1c086-2ee4-11e2-ab68-12313d0174ac",
             "pageUrl":"http://www.nytimes.com/2012/12/02/business/stand-up-desks-gaining-favor-in-the-workplace.html",
-            "title": "Taking a Stand for Office Ergonomics",
+            "title": "Taking a Stand for Office Ergonomics | nytimes",
             "userId":"tony@grosinger.net",
             "pageOpenTime":1352957552099,
             "tabId":1029,
@@ -144,7 +144,7 @@
         "value":{
             "deviceGuid":"46c1c086-2ee4-11e2-ab68-12313d0174ac",
             "pageUrl":"http://imgs.xkcd.com/comics/lego.png",
-            "title": "XKCD",
+            "title": "Lego | xkcd",
             "userId":"tony@grosinger.net",
             "pageOpenTime":1352957552099,
             "tabId":1030,
@@ -175,7 +175,7 @@
         "value":{
             "deviceGuid":"46c1c086-2ee4-11e2-ab68-12313d0174ac",
             "pageUrl":"http://www.uxdrinkinggame.com/drink/if-you-know-the-difference-between-content-strategy-and-information-architecture-drink/",
-            "title": "If you know the difference between content strategy and information architecture, drink",
+            "title": "if you know | uxdrinking",
             "userId":"tony@grosinger.net",
             "pageOpenTime":1352957502099,
             "tabId":1032,
