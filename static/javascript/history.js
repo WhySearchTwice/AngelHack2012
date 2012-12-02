@@ -144,6 +144,9 @@ function drawObjSvg(obj) {
     textNode.appendChild(tspan);
     newNode.appendChild(textNode);
 
+    // Save a reference to this node, because it just might be handy
+    obj.node = newNode;
+
     // Attempt to get the group for this device
     var deviceGroupId = "group_" + obj.deviceGuid;
     var deviceGroup = document.getElementById(deviceGroupId);
@@ -182,6 +185,29 @@ function drawObjSvg(obj) {
 
     // Add our new page to the tab group
     tabGroup.appendChild(newNode);
+
+    // If our node has a parent node, draw a line between them
+    if(obj.parentTabId != null) {
+        // Find the parent node
+        var parentTab = tree.devices[obj.deviceGuid].windows[obj.windowId].tabs[obj.parentTabId];
+
+        // That tab may have a bunch of pages, find the one that actually created this node
+        var parentPage = null;
+        for(var index in parentTab.pages) {
+            var possiblePage = parentTab.pages[index];
+            if(possiblePage.pageOpenTime < obj.pageOpenTime && possiblePage.pageCloseTime > obj.pageOpenTime) {
+                parentPage = possiblePage;
+                break;
+            }
+        }
+        if(parentPage != null) {
+            // Draw the line between these two nodes
+            var newPath = document.createElementNS("http://www.w3.org/2000/svg", "path");
+            newPath.setAttribute("M" + obj.x + "," + obj.y + " L" + parentPage.x + "," + parentPage.y);
+
+            windowGroup.appendChild(newPath);
+        }
+    }
 }
 
 /**
