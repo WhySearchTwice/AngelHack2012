@@ -257,7 +257,7 @@ function parseKey(key) {
  * @Param: set to add this node to (optional)
  * @Author: Tony Grosinger
  */
-function drawNode(page, raphSet=null) {
+function drawNode(page, raphSet) {
     // TODO: Look into animating this node to a new location rather than removing it
 
     pageId = createKey(page);
