@@ -158,7 +158,7 @@ function drawObjSvg(obj) {
         if(pageOpenTime == obj.pageOpenTime) {
             continue;
         }
-        var page = tree.devices[obj.deviceGuid].windows[obj.windowId].tabs[tabId].pages[pageOpenTime];
+        var page = tree.devices[obj.deviceGuid].windows[obj.windowId].tabs[obj.tabId].pages[pageOpenTime];
         xOffset = xOffset + page.width;
     }
 
