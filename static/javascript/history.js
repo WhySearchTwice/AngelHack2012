@@ -117,7 +117,7 @@ function drawObjSvg(obj) {
     // If the window group is null, create it
     if(windowGroup == null) {
         windowGroup = document.createElementNS("http://www.w3.org/2000/svg", "g");
-
+/*
         // If there is already a window in this device, make the top of this window at the bottom of the last one
         var distanceToOffset = 0;
         for(var index in tree.devices[obj.deviceGuid].windows) {
@@ -127,7 +127,7 @@ function drawObjSvg(obj) {
             distanceToOffset += tempWindow.maxYOffset;
         }
         windowGroup.setAttribute("transform", "translate(0, " + distanceToOffset + ")");
-
+*/
         windowGroup.setAttribute("id", windowGroupId);
         deviceGroup.appendChild(windowGroup);
     }
@@ -204,9 +204,9 @@ function redraw() {
     var oldSvg = document.getElementById("svgContainer");
     oldSvg.parentElement.replaceChild(newSvg, oldSvg);
     newSvg.id = "svgContainer";
-    newSvg.appendChild($('<linearGradient id="siteBackground" gradientUnits="userSpaceOnUse" x1="0%" y1="0%" x2="0%" y2="100%">\
+    $('#svgContainer').appendChild($('<linearGradient id="siteBackground" gradientUnits="userSpaceOnUse" x1="0%" y1="0%" x2="0%" y2="100%">\
 <stop stop-color="#BBBBBB" offset="0"/><stop stop-color="#999999" offset="1"/>\
-</linearGradient>')[0]);
+</linearGradient>'));
 
     // For each device
     for(var deviceGuid in tree.devices) {
