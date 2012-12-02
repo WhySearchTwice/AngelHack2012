@@ -10,7 +10,6 @@ var pages = {};
 (function() {
     fetchData();
     testGet();
-    console.log(pages);
 })();
 
 $.fn.createChild = function(data) {
