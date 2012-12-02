@@ -46,7 +46,7 @@ function addChild(parent, data, type) {
     ');
     if (data.hasOwnProperty('attrs')) {
         for (var i = 0, l = data.attrs.length; i < l; i++) {
-            $site.attr(data.attrs[i], 'num_' + data[data.attrs[i]]);
+            $site[0].setAttribute(data.attrs[i], 'num_' + data[data.attrs[i]]);
         }
     }
     $(parent).append($site);
