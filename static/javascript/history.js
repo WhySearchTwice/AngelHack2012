@@ -128,45 +128,59 @@ function parseData() {
  * @Author: Tony Grosinger
  */
 function drawObjSvg(obj) {
-    var deviceSet = getElementWithId(devicesSet, obj.deviceGuid);
-    if(deviceSet == null) {
-        console.log("Creating a new deviceSet");
-        deviceSet = svg.set();
-        deviceSet.id = obj.deviceGuid;
-        devicesSet.push(deviceSet);
+    // var deviceSet = getElementWithId(devicesSet, obj.deviceGuid);
+    // if(deviceSet == null) {
+    //     console.log("Creating a new deviceSet");
+    //     deviceSet = svg.set();
+    //     deviceSet.id = obj.deviceGuid;
+    //     devicesSet.push(deviceSet);
+    // }
+
+    // var windowSet = getElementWithId(deviceSet, obj.windowId);
+    // if(windowSet == null) {
+    //     console.log("Creating a new windowSet");
+    //     windowSet = svg.set();
+    //     windowSet.id = obj.windowId;
+    //     deviceSet.push(windowSet);
+    // }
+
+    // var tabSet = getElementWithId(windowSet, obj.tabId);
+    // if(tabSet == null) {
+    //     console.log("Creating a new tabSet");
+    //     tabSet = svg.set();
+    //     tabSet.id = obj.tabId;
+    //     windowSet.push(tabSet);
+    // }
+
+    var xOffset = 0;
+    for(var pageOpenTime in tree.devices[obj.deviceGuid].windows[obj.windowId].tabs[tabId]) {
+        // Ignore the current page
+        if(pageOpenTime == obj.pageOpenTime) {
+            continue;
+        }
+        var page = tree.devices[obj.deviceGuid].windows[obj.windowId].tabs[tabId].pages[pageOpenTime];
+        xOffset = xOffset + page.width;
     }
 
-    var windowSet = getElementWithId(deviceSet, obj.windowId);
-    if(windowSet == null) {
-        console.log("Creating a new windowSet");
-        windowSet = svg.set();
-        windowSet.id = obj.windowId;
-        deviceSet.push(windowSet);
-    }
+    // Add the xOffset to the x value of the parent
 
-    var tabSet = getElementWithId(windowSet, obj.tabId);
-    if(tabSet == null) {
-        console.log("Creating a new tabSet");
-        tabSet = svg.set();
-        tabSet.id = obj.tabId;
-        windowSet.push(tabSet);
-    }
+    // Set the x value
+    obj.x = xOffset;
 
     // Calculate the Y value based on how many other tabs have been opened in this window
-    obj.y = deviceSet.length * 100;
-    console.log("y: " + obj.y);
-
-    // Calculate the X value based on how many other pages have been opened in this tab
-    obj.x = windowSet.length * 100;
-    console.log("x: " + obj.x);
-
-    console.log(devicesSet);
+    //obj.y = deviceSet.length * 100;
+    //console.log("y: " + obj.y);
 
     // Set X, Y, and Height based on set information
     obj.height = 100;
+    obj.y = 100;
 
-    // Create a new node in the tab set
-    drawNode(obj, tabSet);
+    // Create a new node
+    var newNode = drawNode(obj);
+    //tabSet.push(node);
+
+    obj.node = newNode;
+    obj.containingSet = tabSet;
 }
 
 /**
@@ -271,7 +285,7 @@ function parseKey(key) {
  * @Param: set to add this node to (optional)
  * @Author: Tony Grosinger
  */
-function drawNode(page, raphSet) {
+function drawNode(page) {
     // TODO: Look into animating this node to a new location rather than removing it
 
     pageId = createKey(page);
@@ -283,9 +297,7 @@ function drawNode(page, raphSet) {
     var newNode = svg.rect(page.x, page.y, page.width, page.height);
     newNode.id = pageId;
 
-    if(raphSet != null) {
-        raphSet.push(newNode);
-    }
+    return newNode;
 }
 
 /**
