@@ -298,9 +298,7 @@ function collapseParent(parentKey) {
             var page = tab.pages[pageOpenTime];
 
             // Add isCollapsed if the page has the correct parent
-            if(page.parentTabId == parent.tabId) {
-                console.log(page.isCollapsed);
-
+            if(page.parentTabId == parent.tabId && page.pageOpenTime > parent.pageOpenTime && page.pageOpenTime < parent.pageCloseTime) {
                 page.isCollapsed = !page.isCollapsed || false;
             }
         }
