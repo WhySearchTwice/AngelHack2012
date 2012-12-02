@@ -256,7 +256,7 @@ function createSvgNode(obj) {
 
     // Create a clipping mask
     var $newNodeMask = $('\
-        <mask x="' + obj.x + '" y="' + obj.y + '" width="' + obj.width + '" height="50" id="mask_"' + obj.deviceGuid + "_" + obj.windowId + "_" + obj.tabId + "_" + obj.pageOpenTime +'">\
+        <mask x="' + obj.x + '" y="' + obj.y + '" width="' + obj.width + '" height="50" id="mask_' + obj.deviceGuid + "_" + obj.windowId + "_" + obj.tabId + "_" + obj.pageOpenTime +'">\
             <rect x="' + obj.x + '" y="' + obj.y + '" width="' + obj.width + '" height="50" fill="white"></rect>\
         </mask>\
     ');
