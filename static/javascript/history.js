@@ -23,6 +23,7 @@ var view = {
 };
 
 var pageStartTime = 1352957091993;
+var nodeSizeScalingFactor = 200;
 
 // Map of generated keys to an id used on the page
 var ids = {};
@@ -108,8 +109,8 @@ function parseData() {
         tab.pages[obj.pageOpenTime] = obj;
 
         // Create a little metadata about the page
-        obj.width = ((obj.pageCloseTime - obj.pageOpenTime) / 500);
-        obj.x = ((obj.pageOpenTime - pageStartTime) / 500);
+        obj.width = ((obj.pageCloseTime - obj.pageOpenTime) / nodeSizeScalingFactor);
+        obj.x = ((obj.pageOpenTime - pageStartTime) / nodeSizeScalingFactor);
         obj.key = createKey(obj);
 
         //drawObjDom(obj);
