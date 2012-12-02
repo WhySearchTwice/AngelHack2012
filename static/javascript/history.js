@@ -35,7 +35,7 @@ var ids = {};
         return this;
     }
 
-    testGet('simpleReddit.json');
+    testGet('multiWindow.json');
 })();
 
 function addChild(parent, data, type) {
