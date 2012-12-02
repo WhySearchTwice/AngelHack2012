@@ -40,7 +40,7 @@ var ids = {};
 
 function addChild(parent, data, type) {
     $site = $('\
-        <div class="' + type + '" id="page_' + ids[data.deviceGuid + data.windowId + data.tabId + data.pageOpenTime] + '">\
+        <div class="' + type + '" parenttabid="num_' + data.parentTabId + '" id="page_' + ids[data.deviceGuid + data.windowId + data.tabId + data.pageOpenTime] + '">\
             <div class="site">' + data.pageUrl + '</div>\
         </div>\
     ');
@@ -105,8 +105,8 @@ function parseData() {
         } else {
             $('[tabid="num_' + obj.tabId + '"]').addStem(obj);
         }
-        $('[windowid="num_' + obj.windowId + '"] [tabid="num_' + obj.tabId + '"] .branch').moveInto($('#page_' + pageId));
-
+        //$('[windowid="num_' + obj.windowId + '"] [tabid="num_' + obj.tabId + '"] .branch').moveInto($('#page_' + pageId));
+        $('[parenttabid="num_' + obj.tabId + '"] .branch').moveInto($('#page_' + pageId));
     }
 
     // Erase pages so it can be reused
