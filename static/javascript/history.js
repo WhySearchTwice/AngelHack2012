@@ -299,6 +299,7 @@ function collapseParent(parentKey) {
 
             // Add isCollapsed if the page has the correct parent
             if(page.parentTabId == parent.tabId) {
+                console.log(page.isCollapsed);
                 if(!page.isCollapsed == null && page.isCollapsed == true) {
                     page.isCollapsed = false;
                 } else {
