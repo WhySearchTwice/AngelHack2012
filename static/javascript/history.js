@@ -320,8 +320,6 @@ function collapseParent(parentKey) {
     var parent = parseKey(parentKey);
     var window = tree.devices[parent.deviceGuid].windows[parent.windowId];
 
-    // TODO: This will not work when a tab has something coming out of it that was not made by the parent
-
     // For each tab
     for(var tabId in window.tabs) {
         var tab = window.tabs[tabId];
@@ -331,9 +329,11 @@ function collapseParent(parentKey) {
         // For each page
         for(var pageOpenTime in tab.pages) {
             var page = tab.pages[pageOpenTime];
+            console.log("Got here 1: " + page.pageOpenTime);
 
             // Add isCollapsed if the page has the correct parent
             if(page.parentTabId == parent.tabId && page.pageOpenTime > parent.pageOpenTime && page.pageOpenTime < parent.pageCloseTime) {
+                console.log("Got here 2: " + page.pageOpenTime);
                 if(newValue != null) {
                     page.isCollapsed = newValue;
                 } else {
