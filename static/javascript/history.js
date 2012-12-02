@@ -114,8 +114,8 @@ function parseData() {
         obj.width = ((obj.pageCloseTime - obj.pageOpenTime) / 500);
         obj.key = createKey(obj);
 
-        drawObjDom(obj);
-        //drawObjSvg(obj);
+        //drawObjDom(obj);
+        drawObjSvg(obj);
     }
 
     // Erase pages so it can be reused
@@ -146,9 +146,13 @@ function drawObjSvg(obj) {
         windowSet.push(tabSet);
     }
 
+    // Calculate the Y value based on how many other tabs have been opened in this window
+    obj.y = windowSet.length * 100;
+
+    // Calculate the X value based on how many other pages have been opened in this tab
+    obj.x = tabSet.length * 100;
+
     // Set X, Y, and Height based on set information
-    obj.x = 50;
-    obj.y = 50;
     obj.height = 100;
 
     // Create a new node in the tab set
