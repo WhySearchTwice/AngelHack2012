@@ -40,10 +40,13 @@ var ids = {};
 
 function addChild(parent, data, type) {
     $site = $('\
-        <div class="' + type + '" parenttabid="num_' + data.parentTabId + '" id="page_' + ids[data.deviceGuid + data.windowId + data.tabId + data.pageOpenTime] + '">\
+        <div class="' + type + '" id="page_' + ids[data.deviceGuid + data.windowId + data.tabId + data.pageOpenTime] + '">\
             <div class="site">' + data.pageUrl + '</div>\
         </div>\
     ');
+    if (data.hasOwnProperty('parentTabId')) {
+        $site.attr('parenttabid', 'num_' + data.parentTabId);
+    }
     if (data.hasOwnProperty('attrs')) {
         for (var i = 0, l = data.attrs.length; i < l; i++) {
             $site.attr(data.attrs[i], 'num_' + data[data.attrs[i]]);
