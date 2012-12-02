@@ -176,6 +176,27 @@ function drawObjSvg(obj) {
         if(parentPage != null) {
             drawPathBetweenNodes(parentPage, obj, windowGroup);
         }
+    } else {
+        // Check to see if there is a previous page to connect to instead
+        var mostRecentFound = null;
+        for(var index in tree.devices[obj.deviceGuid].windows[obj.windowId].tabs[obj.tabId].pages) {
+            var possiblePage = tree.devices[obj.deviceGuid].windows[obj.windowId].tabs[obj.tabId].pages[index];
+            if(possiblePage.pageCloseTime < obj.pageOpenTime) {
+                // This is a viable option, check to see if it was the most recent
+                if(mostRecentFound != null && mostRecentFound.pageCloseTime < possiblePage.pageOpenTime) {
+                    // No good
+                    continue;
+                }
+
+                // Looks good
+                mostRecentFound = possiblePage;
+            }
+        }
+
+        // If a page was found, draw a line between them
+        if(mostRecentFound != null) {
+            drawwPathBetweenNodes(mostRecentFound, obj, windowGroup, "inLine");
+        }
     }
 }
 
@@ -223,12 +244,24 @@ function redraw() {
  * @Param: windowGroup SVGGroup object to add element to
  * @Author: Tony Grosinger
  */
-function drawPathBetweenNodes(parent, child, windowGroup) {
-    var x1 = parent.x;
-    var y1 = parent.y + 50;
+function drawPathBetweenNodes(parent, child, windowGroup, mode) {
+    var x1, y1, x2, y2
+    if(mode != null && mode == "inLine") {
+        // A node progressing down the history of a tab
+        x1 = parent.x + parent.width;
+        y1 = parent.y + 25;
 
-    var x2 = child.x;
-    var y2 = child.y + 25;
+        x2 = child.x;
+        y2 = y1;
+    } else {
+        // A child node
+        x1 = parent.x;
+        y1 = parent.y + 50;
+
+        x2 = child.x;
+        y2 = child.y + 25;
+    }
+
 
     var xMid = x1;
     var yMid = y2;
@@ -360,7 +393,6 @@ function createKey(page) {
  * @Author: Tony Grosinger
  */
 function parseKey(key) {
-    console.log(key);
     for(var deviceGuid in tree.devices) {
         if(key.indexOf(deviceGuid) != 0) {
             // Not found here, try the next one
