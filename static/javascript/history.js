@@ -204,6 +204,9 @@ function redraw() {
     var oldSvg = document.getElementById("svgContainer");
     oldSvg.parentElement.replaceChild(newSvg, oldSvg);
     newSvg.id = "svgContainer";
+    newSvg.appendChild($('<linearGradient id="siteBackground" gradientUnits="userSpaceOnUse" x1="0%" y1="0%" x2="0%" y2="100%">\
+<stop stop-color="#BBBBBB" offset="0"/><stop stop-color="#999999" offset="1"/>\
+</linearGradient>')[0]);
 
     // For each device
     for(var deviceGuid in tree.devices) {
@@ -296,6 +299,7 @@ function createSvgNode(obj) {
     var newNodeRect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
     newNodeRect.setAttribute("width", obj.width);
     newNodeRect.setAttribute("height", '30');
+    newNodeRect.setAttribute('style', 'fill:url(#siteBackground)')
     newNode.appendChild(newNodeRect);
 
     // Create the Text
