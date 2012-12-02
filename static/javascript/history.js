@@ -154,6 +154,8 @@ function drawObjSvg(obj) {
     obj.x = windowSet.length * 100;
     console.log("x: " + obj.x);
 
+    console.log(devicesSet);
+
     // Set X, Y, and Height based on set information
     obj.height = 100;
 
