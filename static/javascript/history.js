@@ -329,11 +329,11 @@ function collapseParent(parentKey) {
         // For each page
         for(var pageOpenTime in tab.pages) {
             var page = tab.pages[pageOpenTime];
-            console.log("Got here 1: " + page.pageOpenTime);
 
             // Add isCollapsed if the page has the correct parent
-            if(page.parentTabId == parent.tabId && page.pageOpenTime > parent.pageOpenTime && page.pageOpenTime < parent.pageCloseTime) {
-                console.log("Got here 2: " + page.pageOpenTime);
+            if(newValue != null) {
+                page.isCollapsed = newValue;
+            } else if(page.parentTabId == parent.tabId && page.pageOpenTime > parent.pageOpenTime && page.pageOpenTime < parent.pageCloseTime) {
                 if(newValue != null) {
                     page.isCollapsed = newValue;
                 } else {
