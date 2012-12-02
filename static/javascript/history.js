@@ -331,8 +331,9 @@ function createSVGTooltip(obj, x, y) {
     // Create the tooltip square
     var newNodeRect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
     newNodeRect.setAttribute("height", "50");
-    newNodeRect.setAttribute("width", 450);
+    newNodeRect.setAttribute("width", 550);
     newNodeRect.setAttribute("fill", "grey");
+    newNodeRect.setAttribute("rx", '4');
 
     // Create the text for the tooltip
     var textNode = document.createElementNS("http://www.w3.org/2000/svg", "text");
