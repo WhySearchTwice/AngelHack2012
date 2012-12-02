@@ -206,8 +206,10 @@ function redraw() {
                 for(var pageOpenTime in tab.pages) {
                     var page = tab.pages[pageOpenTime];
 
-                    // Draw the page
-                    drawObjSvg(page);
+                    // Draw the page if not collapsed
+                    if(!page.isCollapsed) {
+                        drawObjSvg(page);
+                    }
                 }
             }
         }
@@ -253,6 +255,7 @@ function createSvgNode(obj) {
     // Create a wrapper object
     var newNode = document.createElementNS("http://www.w3.org/2000/svg", "g");
     newNode.setAttribute("transform", "translate(" + obj.x + "," + obj.y + ")");
+    newNode.addEventListener("click", function() {collapseParent(obj.key);});
 
     // Create the Rectangle
     var newNodeRect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
@@ -272,6 +275,32 @@ function createSvgNode(obj) {
     newNode.appendChild(textNode);
 
     return newNode;
+}
+
+function collapseParent(parentKey) {
+    // Get the containing window
+    var parent = parseKey(parentKey);
+    var window = tree.devices[parent.deviceGuid].windows[parent.windowId];
+
+    // TODO: This will not work when a tab has something coming out of it that was not made by the parent
+
+    // For each tab
+    for(var tabId in window.tabs) {
+        var tab = window.tabs[tabId];
+
+        // For each page
+        for(var pageOpenTime in tab.pages) {
+            var page = tab.pages[pageOpenTime];
+
+            // Add isCollapsed if the page has the correct parent
+            if(page.parentTabId == parent.tabId) {
+                page.isCollapsed = true;
+            }
+        }
+    }
+
+    // Redraw the graphic
+    redraw();
 }
 
 /**
