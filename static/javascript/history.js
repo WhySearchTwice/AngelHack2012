@@ -6,11 +6,15 @@ var tree = {
 };
 var pages = {};
 var view = {
-    time = {
+    time: {
         range: 600000,
-        now: 1352957097873
-    }
-}
+        now: 1352957097873,
+        width: window.innerWidth,
+        modifier: view.width.range / view.time.range
+    },
+    idCounter: 0
+};
+var ids = {};
 
 /* Initialize */
 (function() {
@@ -21,20 +25,26 @@ $.fn.moveInto = function(parent) {
     $(parent).appendChild($(this).detach());
 };
 
-$.fn.createStem = function(data) {
-    createChild(this, data, 'stem');
+$.fn.addStem = function(data) {
+    addChild(this, data, 'stem');
 }
 
-$.fn.createBranch = function(data) {
-    createChild(this, data, 'branch');
+$.fn.addBranch = function(data) {
+    addChild(this, data, 'branch');
 }
 
-function createChild(parent, data, type) {
-    $(parent).appendChild('\
-        <div class"' + type + '">\
+function addChild(parent, data, type) {
+    $site = $('\
+        <div class"' + type + '" id="' + ids[data.deviceGuid + data.windowId + data.tabId + data.pageOpenTime] + '">\
             <div class="site"></div>\
         </div>\
     ');
+    if (data.hasOwnProperty('attrs')) {
+        for (var i = 0, l = data.attrs.length; i < l; i++) {
+            $site.attr(data.attrs[i], data[data.attrs[i]]);
+        }
+    }
+    $(parent).appendChild($site);
 };
 
 function parseData() {
@@ -68,6 +78,21 @@ function parseData() {
         // Create the page in the tab
         console.log("Saving page");
         tab.pages[obj.pageOpenTime] = obj;
+
+        // Register page and create ID
+        var pageId = ids[obj.deviceGuid + obj.windowId + obj.tabId + obj.pageOpenTime] = idCounter;
+        idCounter++;
+
+        if ($('[windowId="' + obj.windowId + '"]').length == 0) {
+            obj.attrs = ['windowId'];
+            $('#timeline').addBranch(obj);
+        } else if ($('[tabId="' + obj.tabId + '"]') == 0) {
+            obj.attrs = ['tabId'];
+            $('[windowId ="' + obj.windowId + '"]').addBranch(obj);
+        } else {
+            $('[tabId="' + obj.tabId + '"]').addStem(obj);
+        }
+
     }
 }
 
