@@ -269,10 +269,6 @@ function drawPathBetweenNodes(parent, child, windowGroup, mode) {
     // Create the actual shape
     var newPath = document.createElementNS("http://www.w3.org/2000/svg", "path");
     newPath.setAttribute("d", "M" + x1 + "," + y1 + " Q" + xMid + "," + yMid + " " + x2 + "," + y2);
-    newPath.setAttribute("stroke", "black");
-    newPath.setAttribute("stroke-width", 3);
-    newPath.setAttribute("opacity", 1);
-    newPath.setAttribute("fill", "none");
 
     // Add it to the provided windowGroup
     windowGroup.appendChild(newPath);
@@ -293,9 +289,9 @@ function createSvgNode(obj) {
 
     // Create a clipping mask
     var $newNodeMask = $('\
-        <mask x="' + obj.x + '" y="' + obj.y + '" width="' + obj.width + '" height="50" id="mask_"' + obj.deviceGuid + "_" + obj.windowId + "_" + obj.tabId + "_" + obj.pageOpenTime +'">\
-            <rect x="' + obj.x + '" y="' + obj.y + '" width="' + obj.width + '" height="50" fill="white"></rect>\
-        </mask>\
+        <clipPath id="mask_' + obj.deviceGuid + "_" + obj.windowId + "_" + obj.tabId + "_" + obj.pageOpenTime +'">\
+            <rect width="' + obj.width + '" height="50"/>\
+        </clipPath>\
     ');
     newNode.appendChild($newNodeMask[0]);
 
@@ -303,7 +299,7 @@ function createSvgNode(obj) {
     var newNodeRect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
     newNodeRect.setAttribute("height", "50");
     newNodeRect.setAttribute("width", obj.width);
-    newNodeRect.setAttribute("fill", "red");
+    newNodeRect.setAttribute("class", "site");
     newNode.appendChild(newNodeRect);
 
     // Create the Text
@@ -311,7 +307,7 @@ function createSvgNode(obj) {
     var tspan = document.createElementNS("http://www.w3.org/2000/svg", "tspan");
     textNode.setAttributeNS("http://www.w3.org/XML/1998/namespace", "xml:space","preserve");
     textNode.setAttribute("y", "30");
-    textNode.setAttribute("mask", "url(#mask_" + obj.deviceGuid + "_" + obj.windowId + "_" + obj.tabId + "_" + obj.pageOpenTime + ")");
+    textNode.setAttribute("style", "clip-path: url(#mask_" + obj.deviceGuid + "_" + obj.windowId + "_" + obj.tabId + "_" + obj.pageOpenTime + ");");
     var myText = document.createTextNode(obj.pageUrl);
     tspan.appendChild(myText);
     textNode.appendChild(tspan);
