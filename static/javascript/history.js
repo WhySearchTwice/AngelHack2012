@@ -284,7 +284,7 @@ function createSvgNode(obj) {
     newNode.setAttribute("id", "group_" + obj.deviceGuid + "_" + obj.windowId + "_" + obj.tabId + "_" + obj.pageOpenTime);
     newNode.addEventListener("click", function() {collapseParent(obj.key);});
     newNode.addEventListener("mouseover", function () {createSVGTooltip(obj, this.newNode);});
-    newNode.addEventListener("mouseout", function() {$(#'tooltip').remove();});
+    newNode.addEventListener("mouseout", function() {$('#tooltip').remove();});
 
     // Create a clipping mask
     var $newNodeMask = $('\
