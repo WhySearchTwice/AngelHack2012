@@ -327,12 +327,13 @@ function createSVGTooltip(obj, x, y) {
     var newNode = document.createElementNS("http://www.w3.org/2000/svg", "g");
     newNode.setAttribute("id", "tooltip");
     newNode.setAttribute("transform", "translate(" + x + "," + (y - 90) + ")");
+    newNode.setAttribute('style', 'filter:url(#dropshadow)');
 
     // Create the tooltip square
     var newNodeRect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
     newNodeRect.setAttribute("height", "50");
-    newNodeRect.setAttribute("width", 550);
-    newNodeRect.setAttribute("fill", "grey");
+    newNodeRect.setAttribute("width", 500);
+    newNodeRect.setAttribute("fill", "whitesmoke");
     newNodeRect.setAttribute("rx", '4');
 
     // Create the text for the tooltip
