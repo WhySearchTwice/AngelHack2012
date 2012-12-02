@@ -5,23 +5,37 @@ var tree = {
     getTab: treeGetTab
 };
 var pages = {};
+var view = {
+    time = {
+        range: 600000,
+        now: 1352957097873
+    }
+}
 
 /* Initialize */
 (function() {
-    fetchData();
     testGet();
 })();
 
-$.fn.createChild = function(data) {
-    $(this).appendChild('<div class="site"></div>');
+$.fn.moveInto = function(parent) {
+    $(parent).appendChild($(this).detach());
 };
 
-function fetchData() {
-    // get data
-    for (var i = 0, l = pages.length; i < l; i++) {
-
-    }
+$.fn.createStem = function(data) {
+    createChild(this, data, 'stem');
 }
+
+$.fn.createBranch = function(data) {
+    createChild(this, data, 'branch');
+}
+
+function createChild(parent, data, type) {
+    $(parent).appendChild('\
+        <div class"' + type + '">\
+            <div class="site"></div>\
+        </div>\
+    ');
+};
 
 function parseData() {
     for(var objId in pages) {
