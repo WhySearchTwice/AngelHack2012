@@ -68,8 +68,8 @@ function parseData() {
         if(tab == null) {
             window.tabs[obj.tabId] = {pages: {}};
             tab = tree.getTab(obj.deviceGuid, obj.windowId, obj.tabId);
-            tab.yOffset = window.maxYOffset + 50; // Used when stacking tabs within the window
-            window.maxYOffset += 50;
+            tab.yOffset = window.maxYOffset + 60; // Used when stacking tabs within the window
+            window.maxYOffset += 60;
         }
 
         // Create the page in the tab
