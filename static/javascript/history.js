@@ -87,8 +87,8 @@ function parseData() {
         tab.pages[obj.pageOpenTime] = obj;
 
         // Register page and create ID
-        var pageId = ids[obj.deviceGuid + obj.windowId + obj.tabId + obj.pageOpenTime] = idCounter;
-        idCounter++;
+        var pageId = ids[obj.deviceGuid + obj.windowId + obj.tabId + obj.pageOpenTime] = view.idCounter;
+        view.idCounter++;
 
         if ($('[windowId="' + obj.windowId + '"]').length == 0) {
             obj.attrs = ['windowId'];
