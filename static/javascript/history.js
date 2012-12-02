@@ -106,7 +106,7 @@ function parseData() {
             obj.attrs = ['tabId'];
             $('[windowid="num_' + obj.windowId + '"]').addBranch(obj);
         } else {
-            $('[tabid="num_' + obj.tabId + '"]').addStem(obj);
+            $('[windowid="num_' + obj.windowId + '"] [tabid="num_' + obj.tabId + '"], [windowid="num_' + obj.windowId + '"][tabid="num_' + obj.tabId + '"]').addStem(obj);
         }
         //$('[windowid="num_' + obj.windowId + '"] [tabid="num_' + obj.tabId + '"] .branch').moveInto($('#page_' + pageId));
         $('[parenttabid="num_' + obj.tabId + '"] .branch').moveInto($('#page_' + pageId));
