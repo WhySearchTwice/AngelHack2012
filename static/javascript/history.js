@@ -358,7 +358,13 @@ function createSVGTooltip(obj, x, y) {
     var seconds = date.getSeconds();
     var formattedTimeClose = hours + ':' + minutes + ':' + seconds;
 
-    var myText = document.createTextNode(obj.pageUrl + ' accessed on ' + formattedTimeStart + ' until ' + formattedTimeClose);
+    // Format pageURL to fit a set size.
+    var currenturl = obj.pageURL;
+    if (currenturl.length > 20) {
+        currenturl = currenturl.substring(19) + '...';
+    }
+
+    var myText = document.createTextNode(currenturl + ' accessed on ' + formattedTimeStart + ' until ' + formattedTimeClose);
     tspan.appendChild(myText);
     textNode.appendChild(tspan);
     newNode.appendChild(newNodeRect);
