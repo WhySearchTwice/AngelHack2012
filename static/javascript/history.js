@@ -98,7 +98,7 @@ function parseData() {
 
         if ($('[windowid="num_' + obj.windowId + '"]').length == 0) {
             obj.attrs = ['windowId'];
-            if ($('[tabid="num_' + obj.tabId + '"]').length == 0) {
+            if ($('[windowid="num_' + obj.windowId + '"] [tabid="num_' + obj.tabId + '"]').length == 0) {
                 obj.attrs.push('tabId');
             }
             $('#timeline').addBranch(obj);
