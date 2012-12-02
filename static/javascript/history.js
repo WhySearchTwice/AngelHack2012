@@ -40,8 +40,8 @@ var ids = {};
 
 function addChild(parent, data, type) {
     $site = $('\
-        <div class"' + type + '" id="' + ids[data.deviceGuid + data.windowId + data.tabId + data.pageOpenTime] + '">\
-            <div class="site"></div>\
+        <div class="' + type + '" id="' + ids[data.deviceGuid + data.windowId + data.tabId + data.pageOpenTime] + '">\
+            <div class="site">' + obj.pageUrl + '</div>\
         </div>\
     ');
     if (data.hasOwnProperty('attrs')) {
@@ -93,14 +93,14 @@ function parseData() {
         var pageId = ids[obj.deviceGuid + obj.windowId + obj.tabId + obj.pageOpenTime] = view.idCounter;
         view.idCounter++;
 
-        if ($('[windowId="' + obj.windowId + '"]').length == 0) {
-            obj.attrs = ['windowId'];
+        if ($('[windowid="' + obj.windowId + '"]').length == 0) {
+            obj.attrs = ['windowid'];
             $('#timeline').addBranch(obj);
-        } else if ($('[tabId="' + obj.tabId + '"]') == 0) {
-            obj.attrs = ['tabId'];
-            $('[windowId ="' + obj.windowId + '"]').addBranch(obj);
+        } else if ($('[tabid="' + obj.tabId + '"]') == 0) {
+            obj.attrs = ['tabid'];
+            $('[windowid ="' + obj.windowId + '"]').addBranch(obj);
         } else {
-            $('[tabId="' + obj.tabId + '"]').addStem(obj);
+            $('[tabid="' + obj.tabId + '"]').addStem(obj);
         }
 
     }
