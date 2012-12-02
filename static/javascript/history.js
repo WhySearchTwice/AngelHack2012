@@ -132,6 +132,7 @@ function drawObjSvg(obj) {
     if(deviceSet == null) {
         console.log("Creating a new deviceSet");
         deviceSet = svg.set();
+        deviceSet.id = obj.deviceGuid;
         devicesSet.push(deviceSet);
     }
 
@@ -139,6 +140,7 @@ function drawObjSvg(obj) {
     if(windowSet == null) {
         console.log("Creating a new windowSet");
         windowSet = svg.set();
+        windowSet.id = obj.windowId;
         deviceSet.push(windowSet);
     }
 
@@ -146,6 +148,7 @@ function drawObjSvg(obj) {
     if(tabSet == null) {
         console.log("Creating a new tabSet");
         tabSet = svg.set();
+        tabSet.id = obj.tabId;
         windowSet.push(tabSet);
     }
 
