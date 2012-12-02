@@ -6,35 +6,50 @@ var tree = {
 };
 var pages = {};
 var view = {
-    time = {
+    time: {
         range: 600000,
-        now: 1352957097873
-    }
-}
+        now: 1352957097873,
+        width: window.innerWidth,
+        modifier: function () {
+            return this.time.width / this.time.range;
+        }
+    },
+    idCounter: 0
+};
+var ids = {};
 
 /* Initialize */
 (function() {
+    $.fn.moveInto = function(parent) {
+        $(parent).append($(this).detach());
+        return this;
+    };
+
+    $.fn.addStem = function(data) {
+        addChild(this, data, 'stem');
+        return this;
+    }
+
+    $.fn.addBranch = function(data) {
+        addChild(this, data, 'branch');
+        return this;
+    }
+
     testGet('simpleReddit.json');
 })();
 
-$.fn.moveInto = function(parent) {
-    $(parent).appendChild($(this).detach());
-};
-
-$.fn.createStem = function(data) {
-    createChild(this, data, 'stem');
-}
-
-$.fn.createBranch = function(data) {
-    createChild(this, data, 'branch');
-}
-
-function createChild(parent, data, type) {
-    $(parent).appendChild('\
-        <div class"' + type + '">\
-            <div class="site"></div>\
+function addChild(parent, data, type) {
+    $site = $('\
+        <div class="' + type + '" id="page_' + ids[data.deviceGuid + data.windowId + data.tabId + data.pageOpenTime] + '">\
+            <div class="site">' + data.pageUrl + '</div>\
         </div>\
     ');
+    if (data.hasOwnProperty('attrs')) {
+        for (var i = 0, l = data.attrs.length; i < l; i++) {
+            $site.attr(data.attrs[i], 'num_' + data[data.attrs[i]]);
+        }
+    }
+    $(parent).append($site);
 };
 
 /**
@@ -73,6 +88,22 @@ function parseData() {
         // Create the page in the tab
         console.log("Saving page");
         tab.pages[obj.pageOpenTime] = obj;
+
+        // Register page and create ID
+        var pageId = ids[obj.deviceGuid + obj.windowId + obj.tabId + obj.pageOpenTime] = view.idCounter;
+        view.idCounter++;
+
+        if ($('[windowid="num_' + obj.windowId + '"]').length == 0) {
+            obj.attrs = ['windowid'];
+            $('#timeline').addBranch(obj);
+        } else if ($('[tabid="num_' + obj.tabId + '"]') == 0) {
+            obj.attrs = ['tabid'];
+            $('[windowid="num_' + obj.windowId + '"]').addBranch(obj);
+        } else {
+            $('[tabid="num_' + obj.tabId + '"]').addStem(obj);
+        }
+        $('[windowid="num_' + obj.windowId + '"] [tabid="num_' + obj.tabId + '"] .branch').moveInto($('#page_' + pageId));
+
     }
 
     // Erase pages so it can be reused
