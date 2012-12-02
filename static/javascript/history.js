@@ -293,9 +293,8 @@ function createSvgNode(obj) {
 
     // Create the Rectangle
     var newNodeRect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
-    newNodeRect.setAttribute("height", "50");
     newNodeRect.setAttribute("width", obj.width);
-    newNodeRect.setAttribute("class", "site");
+    newNodeRect.setAttribute("height", '50');
     newNode.appendChild(newNodeRect);
 
     // Create the Text
