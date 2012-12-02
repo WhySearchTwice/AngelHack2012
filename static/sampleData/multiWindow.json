@@ -74,6 +74,21 @@
         }
     }, {
         "key":"anstosa@gmail.com",
+        "id":"846edf32ffcd234a4372b98c7317d2d5",
+        "value":{
+            "deviceGuid":"46c1c086-2ee4-11e2-ab68-12313d0174ac",
+            "pageUrl":"http://i.imgur.com/POSDFJK.jpg",
+            "userId":"tony@grosinger.net",
+            "pageOpenTime":1352957158873,
+            "tabId":1025,
+            "parentTabId":1022,
+            "pageCloseTime":1352957257873,
+            "windowId":16,
+            "_id":"846edf32ffcd234a4372b98c7317d2d5",
+            "type":"pageView"
+        }
+    }, {
+        "key":"anstosa@gmail.com",
         "id":"846edf32ffcd234a4372b98c7317d2d6",
         "value":{
             "deviceGuid":"46c1c086-2ee4-11e2-ab68-12313d0174ac",
