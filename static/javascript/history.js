@@ -326,13 +326,20 @@ function collapseParent(parentKey) {
     for(var tabId in window.tabs) {
         var tab = window.tabs[tabId];
 
+        var newValue = null;
+
         // For each page
         for(var pageOpenTime in tab.pages) {
             var page = tab.pages[pageOpenTime];
 
             // Add isCollapsed if the page has the correct parent
             if(page.parentTabId == parent.tabId && page.pageOpenTime > parent.pageOpenTime && page.pageOpenTime < parent.pageCloseTime) {
-                page.isCollapsed = !page.isCollapsed || false;
+                if(newValue != null) {
+                    page.isCollapsed = newValue;
+                } else {
+                    page.isCollapsed = !page.isCollapsed || false;
+                    newValue = page.isCollapsed;
+                }
             }
         }
     }
