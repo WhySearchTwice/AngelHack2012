@@ -29,6 +29,7 @@ function parseData() {
         var obj = pages[objId];
 
         // Ensure device exists
+        console.log("Retrieving device");
         var device = tree.getDevice(obj.deviceGuid);
         if(device == null) {
             tree.devices[obj.deviceGuid] = {windows: {}};
@@ -36,6 +37,7 @@ function parseData() {
         }
 
         // Ensure window exists
+        console.log("Retrieving window");
         var window = tree.getWindow(obj.deviceGuid, obj.windowId);
         if(window == null) {
             device.windows[obj.windowId] = {tabs:{}};
@@ -43,6 +45,7 @@ function parseData() {
         }
 
         // Ensure tab exists
+        console.log("Retrieving tab");
         var tab = tree.getTab(obj.deviceGuid, obj.windowId, obj.tabId);
         if(tab == null) {
             window.tabs[obj.tabId] = {pages: {}};
@@ -51,6 +54,7 @@ function parseData() {
 
         // Create the page in the tab
         // TODO: This might be cleared whenever the pages variable is reset
+        console.log("Saving page");
         tab.pages[obj.pageOpenTime] = obj;
     }
 }
