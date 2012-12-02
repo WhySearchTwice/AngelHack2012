@@ -153,7 +153,7 @@ function drawObjSvg(obj) {
     // }
 
     var xOffset = 0;
-    for(var pageOpenTime in tree.devices[obj.deviceGuid].windows[obj.windowId].tabs[obj.tabId]) {
+    for(var pageOpenTime in tree.devices[obj.deviceGuid].windows[obj.windowId].tabs[obj.tabId].pages) {
         // Ignore the current page
         if(pageOpenTime == obj.pageOpenTime) {
             continue;
