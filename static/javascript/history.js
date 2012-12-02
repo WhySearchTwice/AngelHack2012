@@ -283,7 +283,7 @@ function createSvgNode(obj) {
     newNode.setAttribute('class', 'site');
     newNode.setAttribute("id", "group_" + obj.deviceGuid + "_" + obj.windowId + "_" + obj.tabId + "_" + obj.pageOpenTime);
     newNode.addEventListener("click", function() {collapseParent(obj.key);});
-    newNode.addEventListener("mouseover", function () {createSVGTooltip(obj, this.newNode);});
+    newNode.addEventListener("mouseover", function (e) {createSVGTooltip(obj, e.pageX, e.pageY);});
     newNode.addEventListener("mouseout", function() {$('#tooltip').remove();});
 
     // Create a clipping mask
@@ -322,11 +322,11 @@ function createSvgNode(obj) {
  * @Param: Node to attach tooltip to.
  * @Author: Chris Gilbert
  */
-function createSVGTooltip(obj) {
+function createSVGTooltip(obj, x, y) {
     // Create a new group
     var newNode = document.createElementNS("http://www.w3.org/2000/svg", "g");
     newNode.setAttribute("id", "tooltip");
-    newNode.setAttribute("transform", "translate(" + obj.width/2 + "," + (obj.y + 10) + ")");
+    newNode.setAttribute("transform", "translate(" + x + "," + y + 10) + ")");
 
     // Create the tooltip square
     var newNodeRect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
