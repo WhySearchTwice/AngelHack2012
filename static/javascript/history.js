@@ -128,29 +128,6 @@ function parseData() {
  * @Author: Tony Grosinger
  */
 function drawObjSvg(obj) {
-    // var deviceSet = getElementWithId(devicesSet, obj.deviceGuid);
-    // if(deviceSet == null) {
-    //     console.log("Creating a new deviceSet");
-    //     deviceSet = svg.set();
-    //     deviceSet.id = obj.deviceGuid;
-    //     devicesSet.push(deviceSet);
-    // }
-
-    // var windowSet = getElementWithId(deviceSet, obj.windowId);
-    // if(windowSet == null) {
-    //     console.log("Creating a new windowSet");
-    //     windowSet = svg.set();
-    //     windowSet.id = obj.windowId;
-    //     deviceSet.push(windowSet);
-    // }
-
-    // var tabSet = getElementWithId(windowSet, obj.tabId);
-    // if(tabSet == null) {
-    //     console.log("Creating a new tabSet");
-    //     tabSet = svg.set();
-    //     tabSet.id = obj.tabId;
-    //     windowSet.push(tabSet);
-    // }
 
     var xOffset = 0;
     for(var pageOpenTime in tree.devices[obj.deviceGuid].windows[obj.windowId].tabs[obj.tabId].pages) {
@@ -163,7 +140,27 @@ function drawObjSvg(obj) {
         xOffset = xOffset + page.width;
     }
 
+    leftmostPage = null;
+    if(obj.parentTabId != null) {
+        var parentTab = tree.devices[obj.deviceGuid].windows[obj.windowId].tabs[obj.parentTabId];
+
+        // Now find the correct page within this parent based on time
+        // Replace this, just getting the leftmost one for now
+        var leftmostPage = null;
+        for(var parentIds in parentTab.pages) {
+            var parentPage = parentTab.pages[parentIds];
+            if(leftmostPage == null || parentPage.x < leftmostPage.x) {
+                leftmostPage = parentPage;
+            }
+        }
+    }
+
+
+
     // Add the xOffset to the x value of the parent
+    if(leftmostPage != null) {
+        xOffset = xOffset + leftmostPage.x;
+    }
 
     // Set the x value
     obj.x = xOffset;
