@@ -376,7 +376,7 @@ function parseKey(key) {
             // Remove the windowId from the key, then search for the tab
             key = key.substring(windowId.length);
 
-            for(var tabId in tree.devices[deviceGuid].windows[windowId]) {
+            for(var tabId in tree.devices[deviceGuid].windows[windowId].tabs) {
                 if(key.indexOf(tabId) != 0) {
                     // Not found here, try the next one
                     continue;
