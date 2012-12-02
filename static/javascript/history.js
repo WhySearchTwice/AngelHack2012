@@ -352,10 +352,12 @@ function createSVGTooltip(obj, x, y) {
 
     // Date for end time.
     var date = new Date(obj.pageCloseTime*1000);
+    var month = date.getMonth();
+    var day = date.getDate();
     var hours = date.getHours();
     var minutes = date.getMinutes();
     var seconds = date.getSeconds();
-    var formattedTimeClose = hours + ':' + minutes + ':' + seconds;
+    var formattedTimeClose = month + '/' + day + ' at ' + hours + ':' + minutes + ':' + seconds;
 
     // Format pageURL to fit a set size.
     var currenturl = obj.pageUrl;
