@@ -23,7 +23,7 @@ var view = {
 };
 
 var pageStartTime = 1352957091993; // Yea this is hard coded for now
-var nodeSizeScalingFactor = 200; // This is what the time difference in ms is divided by to get pixels
+var nodeSizeScalingFactor = 400; // This is what the time difference in ms is divided by to get pixels
 
 // Map of generated keys to an id used on the page
 var ids = {};
@@ -31,7 +31,7 @@ var ids = {};
 /* Initialize */
 (function() {
     // Load the test data
-    testGet('multiWindow.json');
+    testGet('timtan.json');
 
     drawNowMarker();
 })();
