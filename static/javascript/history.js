@@ -148,6 +148,21 @@ function createKey(page) {
 }
 
 /**
+ * Draws a node on the page. Will attempt to remove any existing node with this ID prior to drawing
+ * @Param: page1 Page object stored in the tree object
+ * @Author: Tony Grosinger
+ */
+function drawNode(page) {
+    // TODO: Look into animating this node to a new location rather than removing it
+
+    pageId = createKey(page);
+    svg.getById(pageId).remove();
+
+    var newNode = svg.rect(page.x, page.y, page.width, page.height);
+    newNode.id = pageId;
+}
+
+/**
  * Draws a path connecting two nodes on the page. Bottom-Middle of page1 to Left-Middle of page2
  * @Param: page1, page2 Page objects stored in the tree object
  * @Author: Tony Grosinger
