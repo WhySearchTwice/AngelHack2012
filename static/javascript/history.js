@@ -44,7 +44,6 @@ function addChild(parent, data, type) {
             <div class="site"></div>\
         </div>\
     ');
-    console.log($site);
     if (data.hasOwnProperty('attrs')) {
         for (var i = 0, l = data.attrs.length; i < l; i++) {
             $site.attr(data.attrs[i], data[data.attrs[i]]);
@@ -94,7 +93,6 @@ function parseData() {
         var pageId = ids[obj.deviceGuid + obj.windowId + obj.tabId + obj.pageOpenTime] = view.idCounter;
         view.idCounter++;
 
-        console.log('adding' + obj.pageUrl);
         if ($('[windowId="' + obj.windowId + '"]').length == 0) {
             obj.attrs = ['windowId'];
             $('#timeline').addBranch(obj);
