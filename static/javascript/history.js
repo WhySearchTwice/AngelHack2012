@@ -204,7 +204,6 @@ function drawObjSvg(obj) {
             // Draw the line between these two nodes
             var newPath = document.createElementNS("http://www.w3.org/2000/svg", "path");
             newPath.setAttribute("d", "M" + obj.x + "," + (obj.y || 0) + " L" + parentPage.x + "," + (parentPage.y || 0));
-            newPath.setAttribute("d", "M 0 0 L 100 100");
             newPath.setAttribute("stroke", "black");
             newPath.setAttribute("stroke-width", 3);
             newPath.setAttribute("opacity", 1);
