@@ -319,6 +319,7 @@ function createSvgNode(obj) {
  * @Author: Chris Gilbert
  */
 function createSVGTooltip(obj) {
+    alert("got here");
     // Create a new group
     var newNode = document.createElementNS("http://www.w3.org/2000/svg", "g");
     newNode.setAttribute("transform", "translate(" + obj.width/2 + "," + (obj.y + 10) + ")");
