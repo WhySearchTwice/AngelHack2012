@@ -10,7 +10,9 @@ var view = {
         range: 600000,
         now: 1352957097873,
         width: window.innerWidth,
-        modifier: view.time.width.range / view.time.range
+        modifier: function () {
+            return this.time.width / this.time.range;
+        }
     },
     idCounter: 0
 };
