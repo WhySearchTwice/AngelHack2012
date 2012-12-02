@@ -94,6 +94,7 @@ function parseData() {
         if(window == null) {
             device.windows[obj.windowId] = {tabs: {}};
             window = tree.getWindow(obj.deviceGuid, obj.windowId);
+            window.maxYOffset = 0; // Used when stacking tabs within the window
         }
 
         // Ensure tab exists
@@ -102,6 +103,8 @@ function parseData() {
         if(tab == null) {
             window.tabs[obj.tabId] = {pages: {}};
             tab = tree.getTab(obj.deviceGuid, obj.windowId, obj.tabId);
+            tab.yOffset = window.maxYOffset + 50; // Used when stacking tabs within the window
+            window.maxYOffset += 50;
         }
 
         // Create the page in the tab
@@ -111,6 +114,7 @@ function parseData() {
         // Create a little metadata about the page
         obj.width = ((obj.pageCloseTime - obj.pageOpenTime) / nodeSizeScalingFactor);
         obj.x = ((obj.pageOpenTime - pageStartTime) / nodeSizeScalingFactor);
+        obj.y = tab.yOffset;
         obj.key = createKey(obj);
 
         //drawObjDom(obj);
@@ -128,20 +132,7 @@ function parseData() {
  */
 function drawObjSvg(obj) {
     // Create a rectangle to represent this element
-    var newNode = document.createElementNS("http://www.w3.org/2000/svg", "g");
-    var newNodeRect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
-    newNodeRect.setAttribute("height", "50");
-    newNodeRect.setAttribute("width", obj.width);
-    newNodeRect.setAttribute("fill", "red");
-    newNode.appendChild(newNodeRect);
-    var textNode = document.createElementNS("http://www.w3.org/2000/svg", "text");
-    var tspan = document.createElementNS("http://www.w3.org/2000/svg", "tspan");
-    textNode.setAttributeNS("http://www.w3.org/XML/1998/namespace", "xml:space","preserve");
-    textNode.setAttribute("y", "30");
-    var myText = document.createTextNode(obj.pageUrl);
-    tspan.appendChild(myText);
-    textNode.appendChild(tspan);
-    newNode.appendChild(textNode);
+    var newNode = createSvgNode(obj);
 
     // Attempt to get the group for this device
     var deviceGroupId = "group_" + obj.deviceGuid;
@@ -165,15 +156,7 @@ function drawObjSvg(obj) {
         deviceGroup.appendChild(windowGroup);
     }
 
-    // Find the Y offset to apply to this node
-    var yOffset = tree.devices[obj.deviceGuid].windows[obj.windowId].tabs[obj.tabId].yOffset;
-    if(yOffset == null) {
-        yOffset = (tree.devices[obj.deviceGuid].windows[obj.windowId].maxYOffset || 0) + 50;
-        tree.devices[obj.deviceGuid].windows[obj.windowId].maxYOffset = yOffset;
-        tree.devices[obj.deviceGuid].windows[obj.windowId].tabs[obj.tabId].yOffset = yOffset;
-    }
-    newNode.setAttribute("transform", "translate(" + obj.x + "," + yOffset + ")");
-    obj.y = yOffset;
+    newNode.setAttribute("transform", "translate(" + obj.x + "," + obj.y + ")");
 
     // Add our new page to the tab group
     windowGroup.appendChild(newNode);
@@ -244,6 +227,36 @@ function drawPathBetweenNodes(parent, child, windowGroup) {
 
     // Add it to the provided windowGroup
     windowGroup.appendChild(newPath);
+}
+
+/**
+ * Create an SVG object that contains a rectangle and text for a page node
+ * @Param: Tree object to be drawn
+ * @Return: SVG Element
+ * @Author: Tony Grosinger
+ */
+function createSvgNode(obj) {
+    // Create a wrapper object
+    var newNode = document.createElementNS("http://www.w3.org/2000/svg", "g");
+
+    // Create the Rectangle
+    var newNodeRect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+    newNodeRect.setAttribute("height", "50");
+    newNodeRect.setAttribute("width", obj.width);
+    newNodeRect.setAttribute("fill", "red");
+    newNode.appendChild(newNodeRect);
+
+    // Create the Text
+    var textNode = document.createElementNS("http://www.w3.org/2000/svg", "text");
+    var tspan = document.createElementNS("http://www.w3.org/2000/svg", "tspan");
+    textNode.setAttributeNS("http://www.w3.org/XML/1998/namespace", "xml:space","preserve");
+    textNode.setAttribute("y", "30");
+    var myText = document.createTextNode(obj.pageUrl);
+    tspan.appendChild(myText);
+    textNode.appendChild(tspan);
+    newNode.appendChild(textNode);
+
+    return newNode;
 }
 
 /**
