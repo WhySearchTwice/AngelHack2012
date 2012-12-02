@@ -283,8 +283,8 @@ function createSvgNode(obj) {
     newNode.setAttribute('class', 'site');
     newNode.setAttribute("id", "group_" + obj.deviceGuid + "_" + obj.windowId + "_" + obj.tabId + "_" + obj.pageOpenTime);
     newNode.addEventListener("click", function() {collapseParent(obj.key);});
-    newNode.addEventListener("mouseover", function () {createSVGTooltip(obj, this.newNode);});
-    //newNode.addEventListener("mouseout", function() {$('#tooltip').remove();});
+    newNode.addEventListener("mouseover", function (e) {createSVGTooltip(obj, e.pageX, e.pageY);});
+    newNode.addEventListener("mouseout", function() {$('#tooltip').remove();});
 
     // Create a clipping mask
     var $newNodeMask = $('\
@@ -321,17 +321,17 @@ function createSvgNode(obj) {
  * @Param: Node to attach tooltip to.
  * @Author: Chris Gilbert
  */
-function createSVGTooltip(obj) {
+function createSVGTooltip(obj, x, y) {
     // Create a new group
     var newNode = document.createElementNS("http://www.w3.org/2000/svg", "g");
     newNode.setAttribute("id", "tooltip");
-    newNode.setAttribute("transform", "translate(" + obj.width/2 + "," + (obj.y + 10) + ")");
+    newNode.setAttribute("transform", "translate(" + x + "," + (y + 10) + ")");
 
     // Create the tooltip square
     var newNodeRect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
     newNodeRect.setAttribute("height", "50");
-    newNodeRect.setAttribute("width", obj.width);
-    newNodeRect.setAttribute("fill", "red");
+    newNodeRect.setAttribute("width", 200);
+    newNodeRect.setAttribute("fill", "blue");
 
     // Create the text for the tooltip
     var textNode = document.createElementNS("http://www.w3.org/2000/svg", "text");
@@ -344,8 +344,7 @@ function createSVGTooltip(obj) {
     newNode.appendChild(newNodeRect);
     newNode.appendChild(textNode);
 
-    var parentGroup = document.getElementById("group_" + obj.deviceGuid + "_" + obj.windowId + "_" + obj.tabId + "_" + obj.pageOpenTime);
-    parentGroup.appendChild(newNode);
+    $('#svgContainer').append(newNode);
 }
 
 /**
