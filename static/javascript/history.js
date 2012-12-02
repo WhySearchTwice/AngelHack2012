@@ -137,10 +137,10 @@ function drawObjSvg(obj) {
     var textNode = document.createElementNS("http://www.w3.org/2000/svg", "text");
     var tspan = document.createElementNS("http://www.w3.org/2000/svg", "tspan");
     textNode.setAttributeNS("http://www.w3.org/XML/1998/namespace", "xml:space","preserve");
-    var text = document.createTextNode(obj.pageUrl);
-    tspan.appendChild(text);
+    var myText = document.createTextNode(obj.pageUrl);
+    tspan.appendChild(myText);
     textNode.appendChild(tspan);
-    newNode.appendChild(text);
+    newNode.appendChild(textNode);
 
 
     // Attempt to get the group for this tab
