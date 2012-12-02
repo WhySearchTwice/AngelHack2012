@@ -147,11 +147,11 @@ function drawObjSvg(obj) {
     }
 
     // Calculate the Y value based on how many other tabs have been opened in this window
-    obj.y = windowSet.length * 100;
+    obj.y = deviceSet.length * 100;
     console.log("y: " + obj.y);
 
     // Calculate the X value based on how many other pages have been opened in this tab
-    obj.x = tabSet.length * 100;
+    obj.x = windowSet.length * 100;
     console.log("x: " + obj.x);
 
     // Set X, Y, and Height based on set information
