@@ -326,7 +326,7 @@ function createSVGTooltip(obj, x, y) {
     // Create a new group
     var newNode = document.createElementNS("http://www.w3.org/2000/svg", "g");
     newNode.setAttribute("id", "tooltip");
-    newNode.setAttribute("transform", "translate(" + x + "," + y + 10) + ")");
+    newNode.setAttribute("transform", "translate(" + x + "," + (y + 10) + ")");
 
     // Create the tooltip square
     var newNodeRect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
