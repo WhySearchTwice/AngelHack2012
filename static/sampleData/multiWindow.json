@@ -20,7 +20,7 @@
             "deviceGuid":"46c1c086-2ee4-11e2-ab68-12313d0174ac",
             "pageUrl":"http://reddit.com",
             "userId":"tony@grosinger.net",
-            "pageOpenTime":1352957117873,
+            "pageOpenTime":1352957097873,
             "tabId":1022,
             "pageCloseTime":1352957197873,
             "windowId":16,
@@ -111,7 +111,7 @@
             "pageOpenTime":1352957167873,
             "tabId":1027,
             "parentTabId":1022,
-            "pageCloseTime":13529571777873,
+            "pageCloseTime":1352957177783,
             "windowId":16,
             "_id":"846edf32ffcd234a4372b98c7317d2d7",
             "type":"pageView"
@@ -126,7 +126,7 @@
             "pageOpenTime":1352957177873,
             "tabId":1028,
             "parentTabId":1022,
-            "pageCloseTime":13529571877873,
+            "pageCloseTime":1352957187787,
             "windowId":16,
             "_id":"846edf32ffcd234a4372b98c7317d2d8",
             "type":"pageView"
@@ -140,7 +140,7 @@
             "userId":"tony@grosinger.net",
             "pageOpenTime":1352957179234,
             "tabId":1028,
-            "pageCloseTime":13529571877873,
+            "pageCloseTime":1352957187787,
             "windowId":17,
             "_id":"846edf32ffcd234a4372b98c7317d2d8",
             "type":"pageView"
