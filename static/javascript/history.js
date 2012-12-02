@@ -252,7 +252,7 @@ function drawPathBetweenNodes(parent, child, windowGroup, mode) {
         y2 = y1;
     } else {
         // A child node
-        x1 = parent.x;
+        x1 = parent.x + 10;
         y1 = parent.y + 30;
 
         x2 = child.x;
@@ -299,7 +299,7 @@ function createSvgNode(obj) {
     var newNodeRect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
     newNodeRect.setAttribute("width", obj.width);
     newNodeRect.setAttribute("height", '30');
-    newNodeRect.setAttribute("rx", '5');
+    newNodeRect.setAttribute("rx", '4');
     newNodeRect.setAttribute('style', 'fill:url(#siteBackground)')
     newNode.appendChild(newNodeRect);
 
