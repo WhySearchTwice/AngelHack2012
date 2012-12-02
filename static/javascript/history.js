@@ -156,8 +156,6 @@ function drawObjSvg(obj) {
         deviceGroup.appendChild(windowGroup);
     }
 
-    newNode.setAttribute("transform", "translate(" + obj.x + "," + obj.y + ")");
-
     // Add our new page to the tab group
     windowGroup.appendChild(newNode);
 
@@ -186,18 +184,34 @@ function drawObjSvg(obj) {
  * @Author: Tony Grosinger
  */
 function redraw() {
-    // Clear all contents
+    // Clear all contents (Just replace the item since there is so much stuff in it)
+    var newSvg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    var oldSvg = document.getElementById("svgContainer");
+    oldSvg.parentElement.replaceChild(newSvg);
+    newSvg.id = "svgContainer";
 
     // For each device
+    for(var deviceGuid in tree.devices) {
+        var device = tree.devices[deviceGuid];
 
-    // For each window
+        // For each window
+        for(var windowId in device.windows) {
+            var window = device.windows[windowId];
 
-    // For each tab
+            // For each tab
+            for(var tabId in window.tabs) {
+                var tab = window.tabs[tabId];
 
-    // For each page
+                // For each page
+                for(var pageOpenTime in tab.pages) {
+                    var page = tab.pages[pageOpenTime];
 
-    // Draw the page
-
+                    // Draw the page
+                    drawObjSvg(page);
+                }
+            }
+        }
+    }
 }
 
 /**
@@ -238,6 +252,7 @@ function drawPathBetweenNodes(parent, child, windowGroup) {
 function createSvgNode(obj) {
     // Create a wrapper object
     var newNode = document.createElementNS("http://www.w3.org/2000/svg", "g");
+    newNode.setAttribute("transform", "translate(" + obj.x + "," + obj.y + ")");
 
     // Create the Rectangle
     var newNodeRect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
