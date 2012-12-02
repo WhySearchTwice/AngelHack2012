@@ -14,7 +14,7 @@ var view = {
 
 /* Initialize */
 (function() {
-    testGet();
+    testGet('simpleReddit.json');
 })();
 
 $.fn.moveInto = function(parent) {
@@ -37,6 +37,11 @@ function createChild(parent, data, type) {
     ');
 };
 
+/**
+ * Parse the data retrieved from the get request and sort it into the tree object.
+ * Will clear the pages object when completed and call function to draw each node as it runs.
+ * @Author: Tony Grosinger
+ */
 function parseData() {
     for(var objId in pages) {
         var obj = pages[objId].value;
@@ -78,6 +83,7 @@ function parseData() {
  * Retrieve the device layer of organization from the window object
  * @Param: String deviceGuid The id of the device that is being searched for
  * @Return: Object device object or null if it does not exist
+ * @Author: Tony Grosinger
  */
 function treeGetDevice(deviceGuid) {
     return this.devices[deviceGuid] || null;
@@ -88,6 +94,7 @@ function treeGetDevice(deviceGuid) {
  * @Param: String deviceGuid The id of the device that is being searched for
  * @Param: String windowId The id of the window that is being searched for
  * @Return: Object window object or null if it does not exist
+ * @Author: Tony Grosinger
  */
 function treeGetWindow(deviceGuid, windowId) {
     if (this.getDevice(deviceGuid) == null) {
@@ -104,6 +111,7 @@ function treeGetWindow(deviceGuid, windowId) {
  * @Param: String windowId The id of the window that is being searched for
  * @Param: String tabId The id of the tab that is being searched for
  * @Return: Object tab object or null if it does not exist
+ * @Author: Tony Grosinger
  */
 function treeGetTab(deviceGuid, windowId, tabId) {
     if (this.getDevice(deviceGuid) == null) {
@@ -120,8 +128,9 @@ function treeGetTab(deviceGuid, windowId, tabId) {
 }
 
 /**
- * Method for retrieving JSON from server.
+ * Method for retrieving JSON from server. Results are saved to pages global object
  * @Param: String email
+ * @Author: Chris Gilbert
  */
 function get(email) {
     var request = $.ajax({
@@ -132,12 +141,14 @@ function get(email) {
 }
 
 /**
- * Test method for getting static JSON from server.
+ * Test method for getting static JSON from server. Results are saved to pages global object
+ * @Param: String filename
+ * @Author: Chris Gilbert
  */
-function testGet() {
+function testGet(filename) {
     $.ajax({
         type: 'GET',
-        url: '/static/sampleData/simpleReddit.json',
+        url: '/static/sampleData/' + filename,
         dataType : 'json'
     })
         .success(function(data) {
