@@ -14,16 +14,18 @@
             clear: both;
             overflow: hidden;
             position: relative;
+			margin-top: 15px;
         }
 
-		.mfreq {
-			background-color: rgb(255,0,0); opacity: 0.5;
+		.hfreq {
+			background-color: rgb(255,0,0); opacity: 0.4;
 		}
 
         .stem {
             float: left;
             overflow: hidden;
             position: relative;
+			margin-left: 10px;
         }
 
         .site {
@@ -38,31 +40,35 @@
 </head>
 <body>
     <div id="timeline" class="branch">
-        <div class="site big">Reddit.com</div>
+        <div class="site big hfreq">Reddit.com</div>
         <div class="stem">
-            <div class="site mfreq">Digg.com</div>
+            <div class="site">Digg.com</div>
             <div class="branch">
-                <div class="site">Imgur 1</div>
+                <div class="site hfreq">Imgur 1</div>
             </div>
             <div class="branch">
-                <div class="site">Imgur 2</div>
+                <div class="site hfreq">Imgur 2</div>
             </div>
         </div>
-        <div class="branch">
+        <div class="branch hfreq">
             <div class="site">Imgur 1</div>
         </div>
-        <div class="branch">
+        <div class="branch hfreq">
             <div class="site">Imgur 2</div>
         </div>
-        <div class="branch">
+        <div class="branch hfreq">
             <div class="site">Imgur 3</div>
         </div>
-        <div class="branch">
+        <div class="branch hfreq">
             <div class="site">Imgur 4</div>
         </div>
-        <div class="branch">
+        <div class="branch hfreq">
             <div class="site">Imgur 5</div>
         </div>
     </div>
+
+	<div id="timeline" class="branch">
+        <div class="site">Johnny's Blog</div>
+	</div>
 </body>
 </html>
