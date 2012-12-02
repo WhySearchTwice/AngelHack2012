@@ -46,7 +46,7 @@ function addChild(parent, data, type) {
     ');
     if (data.hasOwnProperty('attrs')) {
         for (var i = 0, l = data.attrs.length; i < l; i++) {
-            $site[0].setAttribute(data.attrs[i], 'num_' + data[data.attrs[i]]);
+            $site.attr(data.attrs[i], 'num_' + data[data.attrs[i]]);
         }
     }
     $(parent).append($site);
@@ -93,16 +93,16 @@ function parseData() {
         var pageId = ids[obj.deviceGuid + obj.windowId + obj.tabId + obj.pageOpenTime] = view.idCounter;
         view.idCounter++;
 
-        if ($('[windowId="num_' + obj.windowId + '"]').length == 0) {
+        if ($('[windowid="num_' + obj.windowId + '"]').length == 0) {
             obj.attrs = ['windowId'];
             $('#timeline').addBranch(obj);
-        } else if ($('[tabId="num_' + obj.tabId + '"]') == 0) {
+        } else if ($('[tabid="num_' + obj.tabId + '"]') == 0) {
             obj.attrs = ['tabId'];
-            $('[windowId="num_' + obj.windowId + '"]').addBranch(obj);
+            $('[windowid="num_' + obj.windowId + '"]').addBranch(obj);
         } else {
-            $('[tabId="num_' + obj.tabId + '"]').addStem(obj);
+            $('[tabid="num_' + obj.tabId + '"]').addStem(obj);
         }
-        $('[windowId="num_' + obj.windowId + '"] [tabId="num_' + obj.tabId + '"] .branch').moveInto($('#page_' + pageId));
+        $('[windowid="num_' + obj.windowId + '"] [tabid="num_' + obj.tabId + '"] .branch').moveInto($('#page_' + pageId));
 
     }
 
