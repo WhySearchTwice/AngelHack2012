@@ -302,17 +302,16 @@ function createSvgNode(obj) {
     newNodeRect.setAttribute('style', 'fill:url(#siteBackground)')
     newNode.appendChild(newNodeRect);
 
-    // Create the Text
+    var link = document.createElementNS("http://www.w3.org/2000/svg", "a");
     var textNode = document.createElementNS("http://www.w3.org/2000/svg", "text");
-    var tspan = document.createElementNS("http://www.w3.org/2000/svg", "tspan");
+    link.setAttribute('xlink:href', obj.pageUrl);
     textNode.setAttributeNS("http://www.w3.org/XML/1998/namespace", "xml:space","preserve");
-    textNode.setAttribute("y", "20");
-    textNode.setAttribute("x", "10");
-    textNode.setAttribute("style", "clip-path: url(#mask_" + obj.deviceGuid + "_" + obj.windowId + "_" + obj.tabId + "_" + obj.pageOpenTime + ");");
-    var myText = document.createTextNode(obj.pageUrl);
-    tspan.appendChild(myText);
-    textNode.appendChild(tspan);
-    newNode.appendChild(textNode);
+    textNode.setAttribute("y", "30");
+    var myText = document.createTextNode(obj.pageUrl + obj.pageOpenTime);
+    textNode.appendChild(myText);
+    link.appendChild(textNode);
+    newNode.appendChild(newNodeRect);
+    newNode.appendChild(link);
 
     return newNode;
 }
