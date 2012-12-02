@@ -358,7 +358,7 @@ function createSVGTooltip(obj, x, y) {
     var formattedTimeClose = hours + ':' + minutes + ':' + seconds;
 
     // Format pageURL to fit a set size.
-    var currenturl = obj.pageURL;
+    var currenturl = obj.pageUrl;
     if (currenturl.length > 20) {
         currenturl = currenturl.substring(19) + '...';
     }
