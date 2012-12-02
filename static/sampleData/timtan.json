@@ -5,6 +5,7 @@
         "value":{
             "deviceGuid":"46c1c086-2ee4-11e2-ab68-12313d0174ac",
             "pageUrl":"https://mail.google.com",
+            "title": "Google Mail",
             "userId":"tony@grosinger.net",
             "pageOpenTime":1352957092099,
             "tabId":1022,
@@ -19,6 +20,7 @@
         "value":{
             "deviceGuid":"46c1c086-2ee4-11e2-ab68-12313d0174ac",
             "pageUrl":"http://calendar.google.com",
+            "title": "Google Calendar",
             "userId":"tony@grosinger.net",
             "pageOpenTime":1352957092099,
             "tabId":1023,
@@ -33,6 +35,7 @@
         "value":{
             "deviceGuid":"46c1c086-2ee4-11e2-ab68-12313d0174ac",
             "pageUrl":"http://drive.google.com",
+            "title": "Google Drive",
             "userId":"tony@grosinger.net",
             "pageOpenTime":1352957092099,
             "tabId":1024,
@@ -47,6 +50,7 @@
         "value":{
             "deviceGuid":"46c1c086-2ee4-11e2-ab68-12313d0174ac",
             "pageUrl":"http://news.ycombinator.com",
+            "title": "Hacker News",
             "userId":"tony@grosinger.net",
             "pageOpenTime":1352957152099,
             "tabId":1025,
@@ -61,6 +65,7 @@
         "value":{
             "deviceGuid":"46c1c086-2ee4-11e2-ab68-12313d0174ac",
             "pageUrl":"http://cliffmass.blogspot.com.ar/2012/11/triple-rainbow.html",
+            "title": "Triple Rainbow",
             "userId":"tony@grosinger.net",
             "pageOpenTime":1352957192099,
             "tabId":1026,
@@ -76,6 +81,7 @@
         "value":{
             "deviceGuid":"46c1c086-2ee4-11e2-ab68-12313d0174ac",
             "pageUrl":" http://sivers.org/local",
+            "title": "You don't have to be local",
             "userId":"tony@grosinger.net",
             "pageOpenTime":1352957192099,
             "tabId":1027,
@@ -91,6 +97,7 @@
         "value":{
             "deviceGuid":"46c1c086-2ee4-11e2-ab68-12313d0174ac",
             "pageUrl":"http://blog.fogus.me/2009/03/11/seven-books/",
+            "title": "The 7 Books of a Highly Effective Programmer",
             "userId":"tony@grosinger.net",
             "pageOpenTime":1352957192099,
             "tabId":1028,
@@ -106,6 +113,7 @@
         "value":{
             "deviceGuid":"46c1c086-2ee4-11e2-ab68-12313d0174ac",
             "pageUrl":"http://reddit.com",
+            "title": "Reddit",
             "userId":"tony@grosinger.net",
             "pageOpenTime":1352957502099,
             "tabId":1025,
@@ -120,6 +128,7 @@
         "value":{
             "deviceGuid":"46c1c086-2ee4-11e2-ab68-12313d0174ac",
             "pageUrl":"http://www.nytimes.com/2012/12/02/business/stand-up-desks-gaining-favor-in-the-workplace.html",
+            "title": "Taking a Stand for Office Ergonomics",
             "userId":"tony@grosinger.net",
             "pageOpenTime":1352957552099,
             "tabId":1029,
@@ -135,6 +144,7 @@
         "value":{
             "deviceGuid":"46c1c086-2ee4-11e2-ab68-12313d0174ac",
             "pageUrl":"http://imgs.xkcd.com/comics/lego.png",
+            "title": "XKCD",
             "userId":"tony@grosinger.net",
             "pageOpenTime":1352957552099,
             "tabId":1030,
@@ -150,6 +160,7 @@
         "value":{
             "deviceGuid":"46c1c086-2ee4-11e2-ab68-12313d0174ac",
             "pageUrl":"https://twitter.com",
+            "title": "Twitter",
             "userId":"tony@grosinger.net",
             "pageOpenTime":1352957452099,
             "tabId":1031,
@@ -164,6 +175,7 @@
         "value":{
             "deviceGuid":"46c1c086-2ee4-11e2-ab68-12313d0174ac",
             "pageUrl":"http://www.uxdrinkinggame.com/drink/if-you-know-the-difference-between-content-strategy-and-information-architecture-drink/",
+            "title": "If you know the difference between content strategy and information architecture, drink",
             "userId":"tony@grosinger.net",
             "pageOpenTime":1352957502099,
             "tabId":1032,
@@ -179,6 +191,7 @@
         "value":{
             "deviceGuid":"46c1c086-2ee4-11e2-ab68-12313d0174ac",
             "pageUrl":"http://facebook.com",
+            "title": "Facebook",
             "userId":"tony@grosinger.net",
             "pageOpenTime":1352957682099,
             "tabId":1033,
