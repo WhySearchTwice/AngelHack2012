@@ -279,6 +279,7 @@ function createSvgNode(obj) {
     // Create a wrapper object
     var newNode = document.createElementNS("http://www.w3.org/2000/svg", "g");
     newNode.setAttribute("transform", "translate(" + obj.x + "," + obj.y + ")");
+    newNode.setAttribute('class', 'site');
     newNode.setAttribute("id", "group_" + obj.deviceGuid + "_" + obj.windowId + "_" + obj.tabId + "_" + obj.pageOpenTime);
     newNode.addEventListener("click", function() {collapseParent(obj.key);});
 
