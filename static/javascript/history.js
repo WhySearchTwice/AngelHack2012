@@ -282,7 +282,7 @@ function createSvgNode(obj) {
     newNode.setAttribute("transform", "translate(" + obj.x + "," + obj.y + ")");
     newNode.setAttribute('class', 'site');
     newNode.setAttribute("id", "group_" + obj.deviceGuid + "_" + obj.windowId + "_" + obj.tabId + "_" + obj.pageOpenTime);
-
+    newNode.addEventListener("click", function() {collapseParent(obj.key);});
     newNode.addEventListener("mouseover", function (e) {createSVGTooltip(obj, e.pageX, e.pageY);});
     newNode.addEventListener("mouseout", function() {$('#tooltip').remove();});
 
@@ -301,7 +301,7 @@ function createSvgNode(obj) {
     newNodeRect.setAttribute("rx", '4');
     newNodeRect.setAttribute('style', 'fill:url(#siteBackground)')
     newNode.appendChild(newNodeRect);
-    newNodeRect.addEventListener("click", function() {collapseParent(obj.key);});
+
 
     var link = document.createElementNS("http://www.w3.org/2000/svg", "a");
     var textNode = document.createElementNS("http://www.w3.org/2000/svg", "text");
@@ -331,7 +331,7 @@ function createSVGTooltip(obj, x, y) {
     // Create the tooltip square
     var newNodeRect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
     newNodeRect.setAttribute("height", "50");
-    newNodeRect.setAttribute("width", 400);
+    newNodeRect.setAttribute("width", 450);
     newNodeRect.setAttribute("fill", "grey");
 
     // Create the text for the tooltip
@@ -352,12 +352,20 @@ function createSVGTooltip(obj, x, y) {
 
     // Date for end time.
     var date = new Date(obj.pageCloseTime*1000);
+    var month = date.getMonth();
+    var day = date.getDate();
     var hours = date.getHours();
     var minutes = date.getMinutes();
     var seconds = date.getSeconds();
-    var formattedTimeClose = hours + ':' + minutes + ':' + seconds;
+    var formattedTimeClose = month + '/' + day + ' at ' + hours + ':' + minutes + ':' + seconds;
 
-    var myText = document.createTextNode(obj.pageUrl + ' accessed on ' + formattedTimeStart + ' until ' + formattedTimeClose);
+    // Format pageURL to fit a set size.
+    var currenturl = obj.pageUrl;
+    if (currenturl.length > 20) {
+        currenturl = currenturl.substring(0, 19) + '...';
+    }
+
+    var myText = document.createTextNode(currenturl + ' accessed on ' + formattedTimeStart + ' until ' + formattedTimeClose);
     tspan.appendChild(myText);
     textNode.appendChild(tspan);
     newNode.appendChild(newNodeRect);
