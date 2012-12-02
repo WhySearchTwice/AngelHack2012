@@ -1,10 +1,15 @@
+// Storage for parsed page views
 var tree = {
     devices: {},
     getDevice: treeGetDevice,
     getWindow: treeGetWindow,
     getTab: treeGetTab
 };
+
+// Temporary storage for items loaded in the GET requests
 var pages = {};
+
+// ???
 var view = {
     time: {
         range: 600000,
@@ -16,7 +21,13 @@ var view = {
     },
     idCounter: 0
 };
+
+// Map of generated keys to an id used on the page
 var ids = {};
+
+// SVG element that holds all the nodes and paths
+//var svg = Raphael("container", document.width, document.height);
+var svg = Raphael("container", 500, 500);
 
 /* Initialize */
 (function() {
@@ -35,6 +46,7 @@ var ids = {};
         return this;
     }
 
+    // Load the test data
     testGet('multiWindow.json');
 })();
 
@@ -127,6 +139,37 @@ function parseData() {
 
     // Erase pages so it can be reused
     pages = null;
+}
+
+/**
+ * Simply a shortcut for creating the generated ID that is used to identify each node in the IDs object
+ * @Param: Page object stored in the trees global
+ * @Return: String
+ * @Author: Tony Grosinger
+ */
+function createKey(page) {
+    return obj.deviceGuid + obj.windowId + obj.tabId + obj.pageOpenTime;
+}
+
+/**
+ * Draws a path connecting two nodes on the page. Bottom-Middle of page1 to Left-Middle of page2
+ * @Param: page1, page2 Page objects stored in the tree object
+ * @Author: Tony Grosinger
+ */
+function drawConnectingPath(page1, page2) {
+    // Determine the location to create the path
+    var x1 = page1.attr("x") + (page1.attr("width") / 2);
+    var y1 = page1.attr("y") + page1.attr("height");
+
+    var x2 = page2.attr("x");
+    var y2 = page2.attr("y") + (page2.attr("height") / 2);
+
+    var xMid = x1;
+    var yMid = y2;
+
+    // Create the path and set some metadata
+    var newPath = container.path("M " + x1 + "," + y1 + " Q " + xMid + "," + yMid + " " + x2 + "," + y2);
+    newPath.id = "path_" + createKey(page1) + "_" + createKey(page2);
 }
 
 /**
