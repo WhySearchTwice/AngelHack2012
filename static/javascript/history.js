@@ -260,18 +260,19 @@ function drawPathBetweenNodes(parent, child, windowGroup, mode) {
  */
 function createSvgNode(obj) {
     // Create a wrapper object
-    var newNode = document.createElementNS("http://www.w3.org/2000/svg", "g");
+    var newNode = document.createElementNS("http://www.w3.org/2000/svg", "svg");
     newNode.setAttribute("transform", "translate(" + obj.x + "," + obj.y + ")");
+    newNode.setAttribute("width", obj.width);
     newNode.setAttribute("id", "group_" + obj.deviceGuid + "_" + obj.windowId + "_" + obj.tabId + "_" + obj.pageOpenTime);
     newNode.addEventListener("click", function() {collapseParent(obj.key);});
 
     // Create a clipping mask
-    var $newNodeMask = $('\
+    /*var $newNodeMask = $('\
         <clipPath id="mask_' + obj.deviceGuid + "_" + obj.windowId + "_" + obj.tabId + "_" + obj.pageOpenTime +'">\
-            <rect width="' + obj.width + '" height="50" fill="white"></rect>\
+            <rect width="' + obj.width + '" height="50"/>\
         </clipPath>\
     ');
-    newNode.appendChild($newNodeMask[0]);
+    newNode.appendChild($newNodeMask[0]);*/
 
     // Create the Rectangle
     var newNodeRect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
