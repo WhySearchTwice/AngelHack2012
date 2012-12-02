@@ -142,18 +142,16 @@ function drawObjSvg(obj) {
     textNode.appendChild(tspan);
     newNode.appendChild(textNode);
 
-    // Attempt to get the group for this tab
-    var tabGroupId = "group_" + obj.deviceGuid + obj.windowId + obj.tabId;
-    var tabGroup = document.getElementById(tabGroupId);
+    // Attempt to get the group for this device
+    var deviceGroupId = "group_" + obj.deviceGuid;
+    var deviceGroup = document.getElementById(deviceGroupId);
 
-    // If tab group is null, create it
-    if(tabGroup == null) {
-        tabGroup = document.createElementNS("http://www.w3.org/2000/svg", "g");
-        tabGroup.setAttribute("id", tabGroupId);
-        document.getElementById("svgContainer").appendChild(tabGroup);
+    // If the device group is null, create it
+    if(deviceGroup == null) {
+        deviceGroup = document.createElementNS("http://www.w3.org/2000/svg", "g");
+        deviceGroup.setAttribute("id", windowGroupId);
+        document.getElementById("svgContainer").appendChild(deviceGroup);
     }
-
-    tabGroup.appendChild(newNode);
 
     // Attempt to get the group for this window
     var windowGroupId = "group_" + obj.deviceGuid + obj.windowId;
@@ -163,27 +161,25 @@ function drawObjSvg(obj) {
     if(windowGroup == null) {
         windowGroup = document.createElementNS("http://www.w3.org/2000/svg", "g");
         windowGroup.setAttribute("id", windowGroupId);
-        document.getElementById("svgContainer").appendChild(windowGroup);
+        deviceGroup.appendChild(windowGroup);
     }
 
-    // See if the window group contains this tab group
-    var containsTabGroup = false;
-    for(var index in windowGroup.childNodes) {
-        var childNode = windowGroup.childNodes[index];
-        if (childNode.id == tabGroupId) {
-            containsTabGroup = true;
-            break;
-        }
-    }
-    if(!containsTabGroup) {
+    // Attempt to get the group for this tab
+    var tabGroupId = "group_" + obj.deviceGuid + obj.windowId + obj.tabId;
+    var tabGroup = document.getElementById(tabGroupId);
+
+    // If tab group is null, create it
+    if(tabGroup == null) {
+        tabGroup = document.createElementNS("http://www.w3.org/2000/svg", "g");
+        tabGroup.setAttribute("id", tabGroupId);
         windowGroup.appendChild(tabGroup);
+
+        // Offset the y based on how many tabs are open in this window
         tabGroup.setAttribute("transform", "translate(0," + 50 * windowGroup.childNodes.length + ")");
     }
 
-
-
-
-
+    // Add our new page to the tab group
+    tabGroup.appendChild(newNode);
 }
 
 /**
