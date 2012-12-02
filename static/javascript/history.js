@@ -282,7 +282,7 @@ function createSvgNode(obj) {
     newNode.setAttribute("transform", "translate(" + obj.x + "," + obj.y + ")");
     newNode.setAttribute('class', 'site');
     newNode.setAttribute("id", "group_" + obj.deviceGuid + "_" + obj.windowId + "_" + obj.tabId + "_" + obj.pageOpenTime);
-    newNode.addEventListener("click", function() {collapseParent(obj.key);});
+
     newNode.addEventListener("mouseover", function (e) {createSVGTooltip(obj, e.pageX, e.pageY);});
     newNode.addEventListener("mouseout", function() {$('#tooltip').remove();});
 
@@ -301,18 +301,19 @@ function createSvgNode(obj) {
     newNodeRect.setAttribute("rx", '4');
     newNodeRect.setAttribute('style', 'fill:url(#siteBackground)')
     newNode.appendChild(newNodeRect);
+    newNodeRect.addEventListener("click", function() {collapseParent(obj.key);});
 
-    // Create the Text
+    var link = document.createElementNS("http://www.w3.org/2000/svg", "a");
     var textNode = document.createElementNS("http://www.w3.org/2000/svg", "text");
-    var tspan = document.createElementNS("http://www.w3.org/2000/svg", "tspan");
+    link.setAttribute('xlink:href', obj.pageUrl);
     textNode.setAttributeNS("http://www.w3.org/XML/1998/namespace", "xml:space","preserve");
     textNode.setAttribute("y", "20");
     textNode.setAttribute("x", "10");
-    textNode.setAttribute("style", "clip-path: url(#mask_" + obj.deviceGuid + "_" + obj.windowId + "_" + obj.tabId + "_" + obj.pageOpenTime + ");");
     var myText = document.createTextNode(obj.title);
-    tspan.appendChild(myText);
-    textNode.appendChild(tspan);
-    newNode.appendChild(textNode);
+    textNode.appendChild(myText);
+    link.appendChild(textNode);
+    newNode.appendChild(newNodeRect);
+    newNode.appendChild(link);
 
     return newNode;
 }
@@ -331,8 +332,8 @@ function createSVGTooltip(obj, x, y) {
     // Create the tooltip square
     var newNodeRect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
     newNodeRect.setAttribute("height", "50");
-    newNodeRect.setAttribute("width", obj.width);
-    newNodeRect.setAttribute("fill", "red");
+    newNodeRect.setAttribute("width", 200);
+    newNodeRect.setAttribute("fill", "blue");
 
     // Create the text for the tooltip
     var textNode = document.createElementNS("http://www.w3.org/2000/svg", "text");
@@ -345,8 +346,7 @@ function createSVGTooltip(obj, x, y) {
     newNode.appendChild(newNodeRect);
     newNode.appendChild(textNode);
 
-    var parentGroup = document.getElementById("group_" + obj.deviceGuid + "_" + obj.windowId + "_" + obj.tabId + "_" + obj.pageOpenTime);
-    parentGroup.appendChild(newNode);
+    $('#svgContainer').append(newNode);
 }
 
 /**
