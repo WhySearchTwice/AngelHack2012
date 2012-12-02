@@ -164,7 +164,7 @@ function drawConnectingPath(page1, page2) {
     var yMid = y2;
 
     // Create the path and set some metadata
-    var newPath = container.path("M " + x1 +"," + y1 + " Q " + xMid + "," + yMid + " " + x2 + "," y2);
+    var newPath = container.path("M " + x1 + "," + y1 + " Q " + xMid + "," + yMid + " " + x2 + "," + y2);
     newPath.id = "path_" + createKey(page1) + "_" + createKey(page2);
 }
 
