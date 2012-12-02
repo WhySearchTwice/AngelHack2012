@@ -121,7 +121,7 @@ function parseData() {
 
         if ($(windowSelector + ' ' + parentTabSelector + ', ' + windowSelector + parentTabSelector).length != 0) {
             // parent of page is already created, add it
-            $(windowSelector + ' ' + parentTabSelector + ', ' + windowSelector + parentTabSelector).addBranch(obj);
+            $(windowSelector + ' ' + parentTabSelector + ', ' + windowSelector + parentTabSelector).last().addBranch(obj);
         } else if ($(windowSelector).length == 0) {
             // window does not exist, create it
             obj.attrs.push('windowId');
