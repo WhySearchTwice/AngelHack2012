@@ -341,14 +341,24 @@ function createSVGTooltip(obj, x, y) {
     textNode.setAttributeNS("http://www.w3.org/XML/1998/namespace", "xml:space","preserve");
     textNode.setAttribute("x", "10");
     textNode.setAttribute("y", "30");
+
+    // Date for start time.
     var date = new Date(obj.pageOpenTime*1000);
     var month = date.getMonth();
     var day = date.getDate();
     var hours = date.getHours();
     var minutes = date.getMinutes();
     var seconds = date.getSeconds();
-    var formattedTime = month + '/' + day + ' at ' + hours + ':' + minutes + ':' + seconds;
-    var myText = document.createTextNode(obj.pageUrl + ' accessed on ' + formattedTime);
+    var formattedTimeStart = month + '/' + day + ' at ' + hours + ':' + minutes + ':' + seconds;
+
+    // Date for end time.
+    var date = new Date(obj.pageCloseTime*1000);
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+    var seconds = date.getSeconds();
+    var formattedTimeClose = hours + ':' + minutes + ':' + seconds;
+
+    var myText = document.createTextNode(obj.pageUrl + ' accessed on ' + formattedTimeStart + ' until ' + formattedTimeClose);
     tspan.appendChild(myText);
     textNode.appendChild(tspan);
     newNode.appendChild(newNodeRect);
