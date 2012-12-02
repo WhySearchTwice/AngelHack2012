@@ -300,7 +300,7 @@ function createSvgNode(obj) {
     var textNode = document.createElementNS("http://www.w3.org/2000/svg", "text");
     var tspan = document.createElementNS("http://www.w3.org/2000/svg", "tspan");
     textNode.setAttributeNS("http://www.w3.org/XML/1998/namespace", "xml:space","preserve");
-    textNode.setAttribute("y", "10");
+    textNode.setAttribute("y", "30");
     textNode.setAttribute("style", "clip-path: url(#mask_" + obj.deviceGuid + "_" + obj.windowId + "_" + obj.tabId + "_" + obj.pageOpenTime + ");");
     var myText = document.createTextNode(obj.pageUrl);
     tspan.appendChild(myText);
