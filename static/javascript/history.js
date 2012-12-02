@@ -265,6 +265,14 @@ function createSvgNode(obj) {
     newNode.setAttribute("id", "group_" + obj.deviceGuid + "_" + obj.windowId + "_" + obj.tabId + "_" + obj.pageOpenTime);
     newNode.addEventListener("click", function() {collapseParent(obj.key);});
 
+    // Create a clipping mask
+    var $newNodeMask = $('\
+        <mask x="' + obj.x + '" y="' + obj.y + '" width="' + obj.width + '" height="50" id="mask_"' + obj.deviceGuid + "_" + obj.windowId + "_" + obj.tabId + "_" + obj.pageOpenTime +'">\
+            <rect x="' + obj.x + '" y="' + obj.y + '" width="' + obj.width + '" height="50" fill="white"></rect>\
+        </mask>\
+    ');
+    newNode.appendChild($newNodeMask[0]);
+
     // Create the Rectangle
     var newNodeRect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
     newNodeRect.setAttribute("height", "50");
@@ -277,6 +285,7 @@ function createSvgNode(obj) {
     var tspan = document.createElementNS("http://www.w3.org/2000/svg", "tspan");
     textNode.setAttributeNS("http://www.w3.org/XML/1998/namespace", "xml:space","preserve");
     textNode.setAttribute("y", "30");
+    textNode.setAttribute("mask", "url(#mask_" + obj.deviceGuid + "_" + obj.windowId + "_" + obj.tabId + "_" + obj.pageOpenTime + ")");
     var myText = document.createTextNode(obj.pageUrl);
     tspan.appendChild(myText);
     textNode.appendChild(tspan);
