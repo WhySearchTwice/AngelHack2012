@@ -28,8 +28,8 @@ var yHeight = 10;
 var ids = {};
 
 // SVG element that holds all the nodes and paths
-//var svg = Raphael("container", document.width, document.height);
-var svg = Raphael("container", 500, 500);
+var svg = Raphael("container", document.width, document.height);
+//var svg = Raphael("container", 500, 500);
 var devicesSet = svg.set();
 
 /* Initialize */
@@ -176,7 +176,7 @@ function drawObjSvg(obj) {
     // Set X, Y, and Height based on set information
     obj.height = 100;
     obj.y = yHeight;
-    yHeight += 50;
+    yHeight += 10;
 
     // Create a new node
     var newNode = drawNode(obj);
