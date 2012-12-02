@@ -22,15 +22,10 @@ var view = {
     idCounter: 0
 };
 
-var yHeight = 10;
+var pageStartTime = 1352957091993;
 
 // Map of generated keys to an id used on the page
 var ids = {};
-
-// SVG element that holds all the nodes and paths
-var svg = Raphael("container", document.width, document.height);
-//var svg = Raphael("container", 500, 500);
-var devicesSet = svg.set();
 
 /* Initialize */
 (function() {
@@ -114,6 +109,7 @@ function parseData() {
 
         // Create a little metadata about the page
         obj.width = ((obj.pageCloseTime - obj.pageOpenTime) / 500);
+        obj.x = ((obj.pageOpenTime - pageStartTime) / 500);
         obj.key = createKey(obj);
 
         //drawObjDom(obj);
@@ -130,59 +126,26 @@ function parseData() {
  * @Author: Tony Grosinger
  */
 function drawObjSvg(obj) {
+    // Create a rectangle to represent this element
+    var newNode = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+    newNode.setAttribute("height", "50");
+    newNode.setAttribute("width", obj.width);
+    newNode.setAttribute("x", obj.x);
 
-    var xOffset = 0;
-    for(var pageOpenTime in tree.devices[obj.deviceGuid].windows[obj.windowId].tabs[obj.tabId].pages) {
-        // Ignore the current page
-        if(pageOpenTime == obj.pageOpenTime) {
-            continue;
-        }
-        var page = tree.devices[obj.deviceGuid].windows[obj.windowId].tabs[obj.tabId].pages[pageOpenTime];
-        console.log(page);
-        xOffset = xOffset + page.width;
+    // Attempt to get the group for this tab
+    var tabGroupId = "group_" + obj.deviceGuid + obj.windowId + obj.tabId;
+    var tabGroup = document.getElementById(tabGroupId);
+
+    // If group is null, create it
+    if(tabGroup == null) {
+        tabGroup = document.createElementNS("http://www.w3.org/2000/svg", "g");
+        tabGroup.setAttribute("id", tabGroupId);
+        document.getElementById("svgContainer").appendChild(tabGroup);
     }
 
-    leftmostPage = null;
-    if(obj.parentTabId != null) {
-        var parentTab = tree.devices[obj.deviceGuid].windows[obj.windowId].tabs[obj.parentTabId];
-
-        // Now find the correct page within this parent based on time
-        // Replace this, just getting the leftmost one for now
-        var leftmostPage = null;
-        for(var parentIds in parentTab.pages) {
-            var parentPage = parentTab.pages[parentIds];
-            if(leftmostPage == null || parentPage.x < leftmostPage.x) {
-                leftmostPage = parentPage;
-            }
-        }
-    }
+    tabGroup.appendChild(newNode);
 
 
-
-
-
-    // Add the xOffset to the x value of the parent
-    if(leftmostPage != null) {
-        xOffset = xOffset + leftmostPage.x;
-    }
-
-    // Set the x value
-    obj.x = xOffset;
-
-    // Calculate the Y value based on how many other tabs have been opened in this window
-    //obj.y = deviceSet.length * 100;
-    //console.log("y: " + obj.y);
-
-    // Set X, Y, and Height based on set information
-    obj.height = 100;
-    obj.y = yHeight;
-    yHeight += 10;
-
-    // Create a new node
-    var newNode = drawNode(obj);
-    //tabSet.push(node);
-
-    obj.node = newNode;
 }
 
 /**
@@ -279,27 +242,6 @@ function parseKey(key) {
 
     // Nothing was found, sad day
     return null;
-}
-
-/**
- * Draws a node on the page. Will attempt to remove any existing node with this ID prior to drawing
- * @Param: page1 Page object stored in the tree object
- * @Param: set to add this node to (optional)
- * @Author: Tony Grosinger
- */
-function drawNode(page) {
-    // TODO: Look into animating this node to a new location rather than removing it
-
-    pageId = createKey(page);
-    var existingPage = svg.getById(pageId)
-    if(existingPage != null) {
-        existingPage.remove();
-    }
-
-    var newNode = svg.rect(page.x, page.y, page.width, page.height);
-    newNode.id = pageId;
-
-    return newNode;
 }
 
 /**
