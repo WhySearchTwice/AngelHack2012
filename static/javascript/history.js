@@ -229,6 +229,7 @@ function redraw() {
             }
         }
     }
+    drawNowMarker();
 }
 
 /**
