@@ -44,7 +44,7 @@ function addChild(parent, data, type) {
             <div class="site"></div>\
         </div>\
     ');
-    console.log(site);
+    console.log($site);
     if (data.hasOwnProperty('attrs')) {
         for (var i = 0, l = data.attrs.length; i < l; i++) {
             $site.attr(data.attrs[i], data[data.attrs[i]]);
