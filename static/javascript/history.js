@@ -114,8 +114,8 @@ function parseData() {
         obj.width = ((obj.pageCloseTime - obj.pageOpenTime) / 500);
         obj.key = createKey(obj);
 
-        //drawObjDom(obj);
-        drawObjSvg(obj);
+        drawObjDom(obj);
+        //drawObjSvg(obj);
     }
 
     // Erase pages so it can be reused
