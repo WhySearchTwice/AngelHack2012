@@ -261,7 +261,10 @@ function drawNode(page, raphSet) {
     // TODO: Look into animating this node to a new location rather than removing it
 
     pageId = createKey(page);
-    svg.getById(pageId).remove();
+    var existingPage = svg.getById(pageId)
+    if(existingPage != null) {
+        existingPage.remove();
+    }
 
     var newNode = svg.rect(page.x, page.y, page.width, page.height);
     newNode.id = pageId;
