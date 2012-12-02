@@ -8,7 +8,7 @@
 	<title>History</title>
 
 	<style>
-    #svgDefs { position: absolute; }
+    #svgDefs { height: 1px; width: 1px; position: absolute; }
     .trail {
         fill: none;
         stroke: #999;
@@ -54,10 +54,9 @@
 </head>
 <body>
     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="svgDefs">
-            <linearGradient id="siteBackground" gradientUnits="userSpaceOnUse" x1="0%" y1="0%" x2="0%" y2="100%">
-        <stop stop-color="#BBBBBB" offset="0"/><stop stop-color="#999999" offset="1"/>
+        <linearGradient id="siteBackground" gradientUnits="userSpaceOnUse" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop stop-color="#BBBBBB" offset="0"/><stop stop-color="#999999" offset="1"/>
         </linearGradient>
-
     </svg>
     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="svgContainer"></svg>
 
