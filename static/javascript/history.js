@@ -23,7 +23,7 @@ var view = {
 };
 
 var pageStartTime = 1352957091993; // Yea this is hard coded for now
-var nodeSizeScalingFactor = 200; // This is what the time difference in ms is divided by to get pixels
+var nodeSizeScalingFactor = 400; // This is what the time difference in ms is divided by to get pixels
 
 // Map of generated keys to an id used on the page
 var ids = {};
@@ -31,7 +31,9 @@ var ids = {};
 /* Initialize */
 (function() {
     // Load the test data
-    testGet('multiWindow.json');
+    testGet('timtan.json');
+
+    drawNowMarker();
 })();
 
 /**
@@ -115,6 +117,17 @@ function drawObjSvg(obj) {
     // If the window group is null, create it
     if(windowGroup == null) {
         windowGroup = document.createElementNS("http://www.w3.org/2000/svg", "g");
+
+        // If there is already a window in this device, make the top of this window at the bottom of the last one
+        var distanceToOffset = 0;
+        for(var index in tree.devices[obj.deviceGuid].windows) {
+            var tempWindow = tree.devices[obj.deviceGuid].windows[index];
+
+            // Add the maxYOffset to our offset
+            distanceToOffset += tempWindow.maxYOffset;
+        }
+        windowGroup.setAttribute("transform", "translate(0, " + distanceToOffset + ")");
+
         windowGroup.setAttribute("id", windowGroupId);
         deviceGroup.appendChild(windowGroup);
     }
@@ -161,6 +174,24 @@ function drawObjSvg(obj) {
             drawPathBetweenNodes(mostRecentFound, obj, windowGroup, "inLine");
         }
     }
+}
+
+function drawNowMarker() {
+    var startingX = 683400 / nodeSizeScalingFactor;
+    var width = 100;
+    var height = 50;
+
+    var triangle = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    triangle.setAttribute("d", "M" + startingX + ",0 L" + (startingX + width)  + ",0 L" + (startingX + width/2) + "," + height + " L" + startingX + ",0");
+    triangle.setAttribute("class", "nowIcon");
+
+    var verticalLine = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    verticalLine.setAttribute("d", "M" + (startingX + (width/2)) + "," + height + " L" + (startingX + (width/2)) + "," + document.height);
+    verticalLine.setAttribute("class", "nowLine");
+
+    var svg = document.getElementById("svgContainer");
+    svg.appendChild(triangle);
+    svg.appendChild(verticalLine);
 }
 
 /**
@@ -232,10 +263,7 @@ function drawPathBetweenNodes(parent, child, windowGroup, mode) {
     // Create the actual shape
     var newPath = document.createElementNS("http://www.w3.org/2000/svg", "path");
     newPath.setAttribute("d", "M" + x1 + "," + y1 + " Q" + xMid + "," + yMid + " " + x2 + "," + y2);
-    newPath.setAttribute("stroke", "black");
-    newPath.setAttribute("stroke-width", 3);
-    newPath.setAttribute("opacity", 1);
-    newPath.setAttribute("fill", "none");
+    newPath.setAttribute('class', 'trail');
 
     // Add it to the provided windowGroup
     windowGroup.appendChild(newPath);
@@ -251,36 +279,35 @@ function createSvgNode(obj) {
     // Create a wrapper object
     var newNode = document.createElementNS("http://www.w3.org/2000/svg", "g");
     newNode.setAttribute("transform", "translate(" + obj.x + "," + obj.y + ")");
+    newNode.setAttribute('class', 'site');
     newNode.setAttribute("id", "group_" + obj.deviceGuid + "_" + obj.windowId + "_" + obj.tabId + "_" + obj.pageOpenTime);
     newNode.addEventListener("click", function() {collapseParent(obj.key);});
     newNode.addEventListener("mouseover", function () {createSVGTooltip(obj);});
 
     // Create a clipping mask
-    var newNodeMask = document.createElementNS("http://www.w3.org/2000/svg", "mask");
-    newNodeMask.setAttribute("maskUnits", "userSpaceOnUse");
-    newNodeMask.setAttribute("x", obj.x);
-    newNodeMask.setAttribute("y", obj.y);
-    newNodeMask.setAttribute("width", obj.width);
-    newNodeMask.setAttribute("height", "50");
+    var $newNodeMask = $('\
+        <clipPath id="mask_' + obj.deviceGuid + "_" + obj.windowId + "_" + obj.tabId + "_" + obj.pageOpenTime +'">\
+            <rect width="' + obj.width + '" height="50"/>\
+        </clipPath>\
+    ');
+    newNode.appendChild($newNodeMask[0]);
 
     // Create the Rectangle
     var newNodeRect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
-    newNodeRect.setAttribute("height", "50");
     newNodeRect.setAttribute("width", obj.width);
-    newNodeRect.setAttribute("fill", "red");
-    newNodeMask.appendChild(newNodeRect);
+    newNodeRect.setAttribute("height", '50');
+    newNode.appendChild(newNodeRect);
 
     // Create the Text
     var textNode = document.createElementNS("http://www.w3.org/2000/svg", "text");
     var tspan = document.createElementNS("http://www.w3.org/2000/svg", "tspan");
     textNode.setAttributeNS("http://www.w3.org/XML/1998/namespace", "xml:space","preserve");
     textNode.setAttribute("y", "30");
+    textNode.setAttribute("style", "clip-path: url(#mask_" + obj.deviceGuid + "_" + obj.windowId + "_" + obj.tabId + "_" + obj.pageOpenTime + ");");
     var myText = document.createTextNode(obj.pageUrl);
     tspan.appendChild(myText);
     textNode.appendChild(tspan);
-    newNodeMask.appendChild(textNode);
-
-    newNode.appendChild(newNodeMask);
+    newNode.appendChild(textNode);
 
     return newNode;
 }

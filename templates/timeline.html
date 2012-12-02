@@ -7,60 +7,34 @@
 
 	<title>History</title>
 
-	<!-- Le styles -->
-	<link href="/static/css/main/bootstrap.css" rel="stylesheet">
-	<link href="/static/css/main/bootstrap-responsive.css" rel="stylesheet">
-	<link href="/static/css/main/docs.css" rel="stylesheet">
-	<link href="/static/css/main/main.css" rel="stylesheet">
-
 	<style>
-	.big {
-		width: 200px;
-		height: 50px;
+    .trail {
+        fill: none;
+        stroke: #999;
+        stroke-width: 2px;
+    }
+
+	.site rect {
+        height: 50;
+		fill: #49AFCD;
+		stroke: #999;
+        stroke-width: 1px;
 	}
 
-	.branch {
-		float: left;
-		clear: both;
-		/* overflow: hidden; */
-        padding-left: 20px;
-		position: relative;
-		margin-top: 15px;
-	}
+    .site text {
+        font-family: sans-serif;
+    }
 
-	.hfreq {
-		opacity: 0.4;
-	}
+    .nowIcon {
+        stroke: black;
+        stroke-width: 1px;
+        fill: green;
+    }
 
-	.mfreq {
-		opacity: 0.8;
-	}
-
-	.stem {
-		float: left;
-		overflow: hidden;
-		position: relative;
-		margin-left: 10px;
-	}
-
-	.site {
-		background: #49AFCD;
-		padding: 5px;
-		float: left;
-		border: 2px solid gray;
-		border-radius: 5px;
-		text-align: center;
-        width: 200px;
-        overflow: hidden;
-        height: 20px;
-	}
-
-	.timelinecontainer {
-		width: 90%;
-		margin-left: auto;
-		margin-right: auto;
-		min-width: 800px;
-	}
+    .nowLine {
+        stroke: green;
+        stroke-width: 2px;
+    }
 
 	</style>
 
@@ -78,117 +52,12 @@
 </head>
 <body>
     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="svgContainer"></svg>
-    <div id="timeline" class="branch"></div>
-
-	<!-- <div class="btn-group">
-		<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-			Test (Reddit)
-			<span class="caret"></span>
-		</a>
-		<ul class="dropdown-menu">
-			<li>reddit.com</li>
-			<li>Macbook Pro | Nexus 4</li>
-			<li>Last: 11/29</li>
-			<li>Tags: news, cats</li>
-		</ul>
-		<a class="btn" href="#">&#43;</a>
-	</div>
-
-	<div class="bs-docs-example tooltip-demo">
-		<ul class="bs-docs-tooltip-examples">
-			<li><a href="#" rel="tooltip" data-placement="bottom" title="Tooltip on bottom">Test (Reddit)</a></li>
-		</ul>
-	</div>
-
-	<div class="timelinecontainer">
-		<div class="pagination">
-			<ul>
-				<li><a href="#">&laquo;</a></li>
-				<li><a href="#">2011</a></li>
-				<li><a href="#">2012</a></li>
-				<li><a href="#">November</a></li>
-				<li><a href="#">December</a></li>
-			</ul>
-		</div>
-
-		<form class="form-search">
-		  <input type="text" placeholder="Text input">
-		</form>
-
-		<div id="timeline" class="branch">
-			<div class="site big hfreq">Reddit.com</div>
-			<div class="stem">
-				<div class="site">Digg.com</div>
-				<div class="branch">
-					<div class="site hfreq">Imgur 1</div>
-				</div>
-				<div class="branch">
-					<div class="site hfreq">Imgur 2</div>
-				</div>
-			</div>
-			<div class="branch hfreq">
-				<div class="site">Imgur 1</div>
-			</div>
-			<div class="branch hfreq">
-				<div class="site">Imgur 2</div>
-			</div>
-			<div class="branch hfreq">
-				<div class="site">Imgur 3</div>
-			</div>
-			<div class="branch hfreq">
-				<div class="site">Imgur 4</div>
-			</div>
-			<div class="branch hfreq">
-				<div class="site">Imgur 5</div>
-			</div>
-			<div class="btn-group branch hfreq">
-				<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-					Test (Reddit)
-					<span class="caret"></span>
-				</a>
-				<ul class="dropdown-menu">
-					<li>reddit.com</li>
-					<li>Macbook Pro | Nexus 4</li>
-					<li>Last: 11/29</li>
-					<li>Tags: news, cats</li>
-				</ul>
-				<a class="btn" href="#">&#43;</a>
-			</div>
-		</div>
-
-		<div id="timeline" class="branch">
-			<div class="site">Johnny's Blog</div>
-		</div>
-
-		<div id="timeline" class="branch mfreq">
-			<div class="site">Stack Overflow</div>
-		</div>
-
-	</div> -->
 
 	<!-- Le javascript
 	================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-    <script src="/static/javascript/raphael-min.js"></script>
     <script src="/static/javascript/history.js"></script>
 
-	<script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
-	<script src="/static/javascript/main/jquery.js"></script>
-	<script src="/static/javascript/main/google-code-prettify/prettify.js"></script>
-	<script src="/static/javascript/main/bootstrap-transition.js"></script>
-	<script src="/static/javascript/main/bootstrap-alert.js"></script>
-	<script src="/static/javascript/main/bootstrap-modal.js"></script>
-	<script src="/static/javascript/main/bootstrap-dropdown.js"></script>
-	<script src="/static/javascript/main/bootstrap-scrollspy.js"></script>
-	<script src="/static/javascript/main/bootstrap-tab.js"></script>
-	<script src="/static/javascript/main/bootstrap-tooltip.js"></script>
-	<script src="/static/javascript/main/bootstrap-popover.js"></script>
-	<script src="/static/javascript/main/bootstrap-button.js"></script>
-	<script src="/static/javascript/main/bootstrap-collapse.js"></script>
-	<script src="/static/javascript/main/bootstrap-carousel.js"></script>
-	<script src="/static/javascript/main/bootstrap-typeahead.js"></script>
-	<!--<script src="/static/javascript/main/bootstrap-affix.js"></script>-->
-	<script src="/static/javascript/main/application.js"></script>
 </body>
 </html>
