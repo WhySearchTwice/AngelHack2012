@@ -183,17 +183,11 @@ function drawNowMarker() {
 
     var triangle = document.createElementNS("http://www.w3.org/2000/svg", "path");
     triangle.setAttribute("d", "M" + startingX + ",0 L" + (startingX + width)  + ",0 L" + (startingX + width/2) + "," + height + " L" + startingX + ",0");
-    triangle.setAttribute("stroke", "black");
-    triangle.setAttribute("stroke-width", 3);
-    triangle.setAttribute("opacity", 1);
-    triangle.setAttribute("fill", "green");
+    triangle.setAttribute("class", "nowIcon");
 
     var verticalLine = document.createElementNS("http://www.w3.org/2000/svg", "path");
     verticalLine.setAttribute("d", "M" + (startingX + (width/2)) + "," + height + " L" + (startingX + (width/2)) + "," + document.height);
-    verticalLine.setAttribute("stroke", "black");
-    verticalLine.setAttribute("stroke-width", 3);
-    verticalLine.setAttribute("opacity", 1);
-    verticalLine.setAttribute("fill", "green");
+    verticalLine.setAttribute("class", "nowLine");
 
     var svg = document.getElementById("svgContainer");
     svg.appendChild(triangle);
@@ -269,6 +263,7 @@ function drawPathBetweenNodes(parent, child, windowGroup, mode) {
     // Create the actual shape
     var newPath = document.createElementNS("http://www.w3.org/2000/svg", "path");
     newPath.setAttribute("d", "M" + x1 + "," + y1 + " Q" + xMid + "," + yMid + " " + x2 + "," + y2);
+    newPath.setAttribute('class', 'trail');
 
     // Add it to the provided windowGroup
     windowGroup.appendChild(newPath);
@@ -284,6 +279,7 @@ function createSvgNode(obj) {
     // Create a wrapper object
     var newNode = document.createElementNS("http://www.w3.org/2000/svg", "g");
     newNode.setAttribute("transform", "translate(" + obj.x + "," + obj.y + ")");
+    newNode.setAttribute('class', 'site');
     newNode.setAttribute("id", "group_" + obj.deviceGuid + "_" + obj.windowId + "_" + obj.tabId + "_" + obj.pageOpenTime);
     newNode.addEventListener("click", function() {collapseParent(obj.key);});
 
