@@ -299,6 +299,7 @@ function createSvgNode(obj) {
     var newNodeRect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
     newNodeRect.setAttribute("width", obj.width);
     newNodeRect.setAttribute("height", '30');
+    newNodeRect.setAttribute("rx", '5');
     newNodeRect.setAttribute('style', 'fill:url(#siteBackground)')
     newNode.appendChild(newNodeRect);
 
