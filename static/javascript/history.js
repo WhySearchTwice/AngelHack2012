@@ -204,9 +204,6 @@ function redraw() {
     var oldSvg = document.getElementById("svgContainer");
     oldSvg.parentElement.replaceChild(newSvg, oldSvg);
     newSvg.id = "svgContainer";
-    $('#svgContainer').append($('<linearGradient id="siteBackground" gradientUnits="userSpaceOnUse" x1="0%" y1="0%" x2="0%" y2="100%">\
-        <stop stop-color="#BBBBBB" offset="0"/><stop stop-color="#999999" offset="1"/>\
-    </linearGradient>'));
 
     // For each device
     for(var deviceGuid in tree.devices) {
