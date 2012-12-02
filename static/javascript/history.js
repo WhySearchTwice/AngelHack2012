@@ -32,6 +32,8 @@ var ids = {};
 (function() {
     // Load the test data
     testGet('multiWindow.json');
+
+    drawNowMarker();
 })();
 
 /**
@@ -172,6 +174,30 @@ function drawObjSvg(obj) {
             drawPathBetweenNodes(mostRecentFound, obj, windowGroup, "inLine");
         }
     }
+}
+
+function drawNowMarker() {
+    var startingX = 156400 / nodeSizeScalingFactor;
+    var width = 100;
+    var height = 50;
+
+    var triangle = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    triangle.setAttribute("d", "M" + startingX + ",0 L" + (startingX + width)  + ",0 L" + (startingX + width/2) + "," + height + " L" + startingX + ",0");
+    triangle.setAttribute("stroke", "black");
+    triangle.setAttribute("stroke-width", 3);
+    triangle.setAttribute("opacity", 1);
+    triangle.setAttribute("fill", "green");
+
+    var verticalLine = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    verticalLine.setAttribute("d", "M" + (startingX + (width/2)) + "," + height + " L" + (startingX + (width/2)) + "," + document.height);
+    verticalLine.setAttribute("stroke", "black");
+    verticalLine.setAttribute("stroke-width", 3);
+    verticalLine.setAttribute("opacity", 1);
+    verticalLine.setAttribute("fill", "green");
+
+    var svg = document.getElementById("svgContainer");
+    svg.appendChild(triangle);
+    svg.appendChild(verticalLine);
 }
 
 /**
