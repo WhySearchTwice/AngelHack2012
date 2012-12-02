@@ -53,8 +53,6 @@ function parseData() {
 
         // Create the page in the tab
         console.log("Saving page");
-        console.log(obj.pageOpenTime);
-
         tab.pages[obj.pageOpenTime] = obj;
     }
 }
