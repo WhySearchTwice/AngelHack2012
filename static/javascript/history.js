@@ -187,7 +187,7 @@ function redraw() {
     // Clear all contents (Just replace the item since there is so much stuff in it)
     var newSvg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
     var oldSvg = document.getElementById("svgContainer");
-    oldSvg.parentElement.replaceChild(newSvg);
+    oldSvg.parentElement.replaceChild(newSvg, oldSvg);
     newSvg.id = "svgContainer";
 
     // For each device
