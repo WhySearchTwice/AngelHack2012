@@ -96,7 +96,7 @@ function parseData() {
         if ($('[windowid="num_' + obj.windowId + '"]').length == 0) {
             obj.attrs = ['windowId'];
             if ($('[tabid="num_' + obj.tabId + '"]').length == 0) {
-                obj.attrs.push('windowId');
+                obj.attrs.push('tabId');
             }
             $('#timeline').addBranch(obj);
         } else if ($('[tabid="num_' + obj.tabId + '"]').length == 0) {
