@@ -117,7 +117,7 @@ function drawObjSvg(obj) {
     // If the window group is null, create it
     if(windowGroup == null) {
         windowGroup = document.createElementNS("http://www.w3.org/2000/svg", "g");
-
+/*
         // If there is already a window in this device, make the top of this window at the bottom of the last one
         var distanceToOffset = 0;
         for(var index in tree.devices[obj.deviceGuid].windows) {
@@ -127,7 +127,7 @@ function drawObjSvg(obj) {
             distanceToOffset += tempWindow.maxYOffset;
         }
         windowGroup.setAttribute("transform", "translate(0, " + distanceToOffset + ")");
-
+*/
         windowGroup.setAttribute("id", windowGroupId);
         deviceGroup.appendChild(windowGroup);
     }
@@ -324,7 +324,6 @@ function createSvgNode(obj) {
  * @Author: Chris Gilbert
  */
 function createSVGTooltip(obj) {
-    console.log(currentnode);
     // Create a new group
     var newNode = document.createElementNS("http://www.w3.org/2000/svg", "g");
     newNode.setAttribute("transform", "translate(" + obj.width/2 + "," + (obj.y + 10) + ")");
@@ -345,6 +344,7 @@ function createSVGTooltip(obj) {
     textNode.appendChild(tspan);
     newNode.appendChild(newNodeRect);
     newNode.appendChild(textNode);
+    console.log($("group_" + obj.deviceGuid + "_" + obj.windowId + "_" + obj.tabId + "_" + obj.pageOpenTime));
     $("group_" + obj.deviceGuid + "_" + obj.windowId + "_" + obj.tabId + "_" + obj.pageOpenTime).appendChild(newNode);
 }
 
