@@ -305,27 +305,6 @@ function parseKey(key) {
 }
 
 /**
- * Draws a path connecting two nodes on the page. Bottom-Middle of page1 to Left-Middle of page2
- * @Param: page1, page2 Page objects stored in the tree object
- * @Author: Tony Grosinger
- */
-function drawConnectingPath(page1, page2) {
-    // Determine the location to create the path
-    var x1 = page1.attr("x") + (page1.attr("width") / 2);
-    var y1 = page1.attr("y") + page1.attr("height");
-
-    var x2 = page2.attr("x");
-    var y2 = page2.attr("y") + (page2.attr("height") / 2);
-
-    var xMid = x1;
-    var yMid = y2;
-
-    // Create the path and set some metadata
-    var newPath = container.path("M " + x1 + "," + y1 + " Q " + xMid + "," + yMid + " " + x2 + "," + y2);
-    newPath.id = "path_" + createKey(page1) + "_" + createKey(page2);
-}
-
-/**
  * Given a Raphael Set, find an element within it that has a given ID
  * @Param: Set
  * @Param: String
