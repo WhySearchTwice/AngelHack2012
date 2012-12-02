@@ -104,10 +104,14 @@ function parseData() {
         // cache annoying selectors
         var windowSelector = '[windowid="num_' + obj.windowId + '"]';
         var tabSelector = '[tabid="num_' + obj.tabId + '"]';
+        obj.attrs = ['tabId']; // extra DOM attributes that should be populated
 
-        if ($(windowSelector).length == 0) {
+        if ($('[tabid="num_' + obj.parentTabId + '"]').length != 0) {
+            // parent of page is already created, add it
+            $('[tabid="num_' + obj.parentTabId + '"]').addBranch(obj);
+        } else if ($(windowSelector).length == 0) {
             // window does not exist, create it
-            obj.attrs = ['windowId', 'tabId'];  // DOM attributes that should be populated
+            obj.attrs.push('windowId');
             $('#timeline').addBranch(obj);
         } else if ($(windowSelector + ' ' + tabSelector + ', ' + windowSelector + tabSelector).length == 0) {
             // windows exists but tab does not
