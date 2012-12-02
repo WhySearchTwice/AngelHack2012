@@ -136,7 +136,7 @@ function drawObjSvg(obj) {
     newNode.appendChild(newNodeRect);
     var textNode = document.createElementNS("http://www.w3.org/2000/svg", "text");
     var tspan = document.createElementNS("http://www.w3.org/2000/svg", "tspan");
-    text.setAttributeNS("http://www.w3.org/XML/1998/namespace", "xml:space","preserve");
+    textNode.setAttributeNS("http://www.w3.org/XML/1998/namespace", "xml:space","preserve");
     var text = document.createTextNode(obj.pageUrl);
     tspan.appendChild(text);
     textNode.appendChild(tspan);
