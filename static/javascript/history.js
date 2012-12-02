@@ -203,7 +203,7 @@ function drawObjSvg(obj) {
         if(parentPage != null) {
             // Draw the line between these two nodes
             var newPath = document.createElementNS("http://www.w3.org/2000/svg", "path");
-            newPath.setAttribute("M" + obj.x + "," + obj.y + " L" + parentPage.x + "," + parentPage.y);
+            newPath.setAttribute("d", "M" + obj.x + "," + obj.y + " L" + parentPage.x + "," + parentPage.y);
 
             windowGroup.appendChild(newPath);
         }
