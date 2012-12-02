@@ -277,6 +277,11 @@ function createSvgNode(obj) {
     return newNode;
 }
 
+/**
+ * Will toggle the collapsed attribute of all subpages of a particular parent
+ * @Param: String key representing the parent node
+ * @Author: Tony Grosinger
+ */
 function collapseParent(parentKey) {
     // Get the containing window
     var parent = parseKey(parentKey);
@@ -294,7 +299,11 @@ function collapseParent(parentKey) {
 
             // Add isCollapsed if the page has the correct parent
             if(page.parentTabId == parent.tabId) {
-                page.isCollapsed = true;
+                if(!page.isCollapsed == null && page.isCollapsed == true) {
+                    page.isCollapsed = false;
+                } else {
+                    page.isCollapsed = true;
+                }
             }
         }
     }
