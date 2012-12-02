@@ -309,7 +309,7 @@ function createSvgNode(obj) {
     textNode.setAttribute("y", "20");
     textNode.setAttribute("x", "10");
     textNode.setAttribute("style", "clip-path: url(#mask_" + obj.deviceGuid + "_" + obj.windowId + "_" + obj.tabId + "_" + obj.pageOpenTime + ");");
-    var myText = document.createTextNode(obj.pageUrl);
+    var myText = document.createTextNode(obj.title);
     tspan.appendChild(myText);
     textNode.appendChild(tspan);
     newNode.appendChild(textNode);
