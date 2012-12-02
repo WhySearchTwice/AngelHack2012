@@ -116,9 +116,10 @@ function parseData() {
         // cache annoying selectors
         var windowSelector = '[windowid="num_' + obj.windowId + '"]';
         var tabSelector = '[tabid="num_' + obj.tabId + '"]';
+        var parentTabSelector = '[tabid="num_' + obj.parentTabId + '"]';
         obj.attrs = ['tabId']; // extra DOM attributes that should be populated
 
-        if ($('[tabid="num_' + obj.parentTabId + '"]').length != 0) {
+        if ($(windowSelector + ' ' + parentTabSelector + ', ' + windowSelector + parentTabSelector).length != 0) {
             // parent of page is already created, add it
             $('[tabid="num_' + obj.parentTabId + '"]').addBranch(obj);
         } else if ($(windowSelector).length == 0) {
