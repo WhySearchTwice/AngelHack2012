@@ -136,7 +136,7 @@ function drawObjSvg(obj) {
     var tabGroupId = "group_" + obj.deviceGuid + obj.windowId + obj.tabId;
     var tabGroup = document.getElementById(tabGroupId);
 
-    // If group is null, create it
+    // If tab group is null, create it
     if(tabGroup == null) {
         tabGroup = document.createElementNS("http://www.w3.org/2000/svg", "g");
         tabGroup.setAttribute("id", tabGroupId);
@@ -144,6 +144,34 @@ function drawObjSvg(obj) {
     }
 
     tabGroup.appendChild(newNode);
+
+    // Attempt to get the group for this window
+    var windowGroupId = "group_" + obj.deviceGuid + obj.windowId;
+    var windowGroup = document.getElementById(windowGroupId);
+
+    // If the window group is null, create it
+    if(windowGroup == null) {
+        windowGroup = document.createElementNS("http://www.w3.org/2000/svg", "g");
+        windowGroup.setAttribute("id", windowGroupId);
+        document.getElementById("svgContainer").appendChild(windowGroup);
+    }
+
+    // See if the window group contains this tab group
+    var containsTabGroup = false;
+    for(var index in windowGroup.childNodes) {
+        var childNode = windowGroup.childNodes[index];
+        if childNode.id == tabGroupId {
+            containsTabGroup = true;
+            break;
+        }
+    }
+    if(!containsTabGroup) {
+        windowGroup.appendChild(tabGroup);
+        tabGroup.setAttribute("transform", "translate(0,50)");
+    }
+
+
+
 
 
 }
