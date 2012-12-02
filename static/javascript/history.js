@@ -282,7 +282,7 @@ function createSvgNode(obj) {
     newNode.setAttribute('class', 'site');
     newNode.setAttribute("id", "group_" + obj.deviceGuid + "_" + obj.windowId + "_" + obj.tabId + "_" + obj.pageOpenTime);
     newNode.addEventListener("click", function() {collapseParent(obj.key);});
-    newNode.addEventListener("mouseover", function () {createSVGTooltip(obj);});
+    newNode.addEventListener("mouseover", function () {createSVGTooltip(obj, this.newNode);});
 
     // Create a clipping mask
     var $newNodeMask = $('\
@@ -318,8 +318,7 @@ function createSvgNode(obj) {
  * @Return: Updated Child
  * @Author: Chris Gilbert
  */
-function createSVGTooltip(obj) {
-    alert("got here");
+function createSVGTooltip(obj, currentnode) {
     // Create a new group
     var newNode = document.createElementNS("http://www.w3.org/2000/svg", "g");
     newNode.setAttribute("transform", "translate(" + obj.width/2 + "," + (obj.y + 10) + ")");
@@ -340,6 +339,7 @@ function createSVGTooltip(obj) {
     textNode.appendChild(tspan);
     newNode.appendChild(newNodeRect);
     newNode.appendChild(textNode);
+    currentnode.appendChild(newNode);
 }
 
 /**
