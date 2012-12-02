@@ -342,11 +342,13 @@ function createSVGTooltip(obj, x, y) {
     textNode.setAttribute("x", "10");
     textNode.setAttribute("y", "30");
     var date = new Date(obj.pageOpenTime*1000);
+    var month = date.getMonth();
+    var day = date.getDate();
     var hours = date.getHours();
     var minutes = date.getMinutes();
     var seconds = date.getSeconds();
-    var formattedTime = hours + ':' + minutes + ':' + seconds;
-    var myText = document.createTextNode(obj.pageUrl + ' on ' + formattedTime);
+    var formattedTime = month + '/' + day + ' at ' + hours + ':' + minutes + ':' + seconds;
+    var myText = document.createTextNode(obj.pageUrl + ' accessed on ' + formattedTime);
     tspan.appendChild(myText);
     textNode.appendChild(tspan);
     newNode.appendChild(newNodeRect);
