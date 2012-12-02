@@ -250,7 +250,7 @@ function drawPathBetweenNodes(parent, child, windowGroup, mode) {
     } else {
         // A child node
         x1 = parent.x;
-        y1 = parent.y + 50;
+        y1 = parent.y + 40;
 
         x2 = child.x;
         y2 = child.y + 25;
@@ -302,7 +302,7 @@ function createSvgNode(obj) {
     var textNode = document.createElementNS("http://www.w3.org/2000/svg", "text");
     var tspan = document.createElementNS("http://www.w3.org/2000/svg", "tspan");
     textNode.setAttributeNS("http://www.w3.org/XML/1998/namespace", "xml:space","preserve");
-    textNode.setAttribute("y", "10");
+    textNode.setAttribute("y", "20");
     textNode.setAttribute("x", "10");
     textNode.setAttribute("style", "clip-path: url(#mask_" + obj.deviceGuid + "_" + obj.windowId + "_" + obj.tabId + "_" + obj.pageOpenTime + ");");
     var myText = document.createTextNode(obj.pageUrl);
