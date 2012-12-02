@@ -243,10 +243,6 @@ function drawPathBetweenNodes(parent, child, windowGroup, mode) {
     // Create the actual shape
     var newPath = document.createElementNS("http://www.w3.org/2000/svg", "path");
     newPath.setAttribute("d", "M" + x1 + "," + y1 + " Q" + xMid + "," + yMid + " " + x2 + "," + y2);
-    newPath.setAttribute("stroke", "black");
-    newPath.setAttribute("stroke-width", 3);
-    newPath.setAttribute("opacity", 1);
-    newPath.setAttribute("fill", "none");
 
     // Add it to the provided windowGroup
     windowGroup.appendChild(newPath);
