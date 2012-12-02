@@ -323,7 +323,8 @@ function createSvgNode(obj) {
  * @Return: Updated Child
  * @Author: Chris Gilbert
  */
-function createSVGTooltip(obj, currentnode) {
+function createSVGTooltip(obj) {
+    console.log(currentnode);
     // Create a new group
     var newNode = document.createElementNS("http://www.w3.org/2000/svg", "g");
     newNode.setAttribute("transform", "translate(" + obj.width/2 + "," + (obj.y + 10) + ")");
@@ -344,7 +345,7 @@ function createSVGTooltip(obj, currentnode) {
     textNode.appendChild(tspan);
     newNode.appendChild(newNodeRect);
     newNode.appendChild(textNode);
-    currentnode.appendChild(newNode);
+    $("group_" + obj.deviceGuid + "_" + obj.windowId + "_" + obj.tabId + "_" + obj.pageOpenTime).appendChild(newNode);
 }
 
 /**
