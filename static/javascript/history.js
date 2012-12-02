@@ -181,7 +181,6 @@ function drawObjSvg(obj) {
     //tabSet.push(node);
 
     obj.node = newNode;
-    obj.containingSet = tabSet;
 }
 
 /**
