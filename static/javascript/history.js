@@ -41,7 +41,7 @@ var ids = {};
 function addChild(parent, data, type) {
     $site = $('\
         <div class="' + type + '" id="' + ids[data.deviceGuid + data.windowId + data.tabId + data.pageOpenTime] + '">\
-            <div class="site">' + obj.pageUrl + '</div>\
+            <div class="site">' + data.pageUrl + '</div>\
         </div>\
     ');
     if (data.hasOwnProperty('attrs')) {
