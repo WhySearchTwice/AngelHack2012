@@ -46,7 +46,7 @@ function addChild(parent, data, type) {
             $site.attr(data.attrs[i], data[data.attrs[i]]);
         }
     }
-    $(parent).appendChild($site);
+    $(parent).append($site);
 };
 
 /**
