@@ -300,8 +300,8 @@ function createSvgNode(obj) {
     newNodeRect.setAttribute("height", '30');
     newNodeRect.setAttribute("rx", '4');
     newNodeRect.setAttribute('style', 'fill:url(#siteBackground)')
-    newNode.appendChild(newNodeRect);/*
-    newNodeRect.addEventListener("click", function() {collapseParent(obj.key);});*/
+    newNode.appendChild(newNodeRect);
+    newNodeRect.addEventListener("click", function() {collapseParent(obj.key);});
 
     var link = document.createElementNS("http://www.w3.org/2000/svg", "a");
     var textNode = document.createElementNS("http://www.w3.org/2000/svg", "text");
