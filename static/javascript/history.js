@@ -195,7 +195,7 @@ function drawObjSvg(obj) {
 
         // If a page was found, draw a line between them
         if(mostRecentFound != null) {
-            drawwPathBetweenNodes(mostRecentFound, obj, windowGroup, "inLine");
+            drawPathBetweenNodes(mostRecentFound, obj, windowGroup, "inLine");
         }
     }
 }
