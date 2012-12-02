@@ -4,20 +4,6 @@
         "id":"846edf32ffcd234a4372b98c7317d2d1",
         "value":{
             "deviceGuid":"46c1c086-2ee4-11e2-ab68-12313d0174ac",
-            "pageUrl":"chrome://newtab/",
-            "userId":"tony@grosinger.net",
-            "pageOpenTime":1352957091993,
-            "tabId":1022,
-            "pageCloseTime":1352957092093,
-            "windowId":16,
-            "_id":"846edf32ffcd234a4372b98c7317d2d1",
-            "type":"pageView"
-        }
-    }, {
-        "key":"timtan@gmail.com",
-        "id":"846edf32ffcd234a4372b98c7317d2d1",
-        "value":{
-            "deviceGuid":"46c1c086-2ee4-11e2-ab68-12313d0174ac",
             "pageUrl":"https://mail.google.com",
             "userId":"tony@grosinger.net",
             "pageOpenTime":1352957092099,
@@ -62,7 +48,7 @@
             "deviceGuid":"46c1c086-2ee4-11e2-ab68-12313d0174ac",
             "pageUrl":"http://news.ycombinator.com",
             "userId":"tony@grosinger.net",
-            "pageOpenTime":1352957192099,
+            "pageOpenTime":1352957152099,
             "tabId":1025,
             "pageCloseTime":1352957392099,
             "windowId":16,
@@ -138,7 +124,7 @@
             "pageOpenTime":1352957552099,
             "tabId":1029,
             "parentTabId":1025,
-            "pageCloseTime":1352957599099,
+            "pageCloseTime":1352957709099,
             "windowId":16,
             "_id":"846edf32ffcd234a4372b98c7317d2d1",
             "type":"pageView"
@@ -153,7 +139,7 @@
             "pageOpenTime":1352957552099,
             "tabId":1030,
             "parentTabId":1025,
-            "pageCloseTime":1352957602099,
+            "pageCloseTime":1352957749099,
             "windowId":16,
             "_id":"846edf32ffcd234a4372b98c7317d2d1",
             "type":"pageView"
@@ -195,7 +181,7 @@
             "pageUrl":"http://facebook.com",
             "userId":"tony@grosinger.net",
             "pageOpenTime":1352957682099,
-            "tabId":1032,
+            "tabId":1033,
             "parentTabId":1031,
             "pageCloseTime":1352957791993,
             "windowId":16,

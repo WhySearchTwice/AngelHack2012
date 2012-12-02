@@ -132,7 +132,7 @@ function drawObjSvg(obj) {
         deviceGroup.appendChild(windowGroup);
     }
 
-    // Add our new page to the tab group
+    // Add our new page to the window group
     windowGroup.appendChild(newNode);
 
     // If our node has a parent node, draw a line between them
@@ -177,7 +177,7 @@ function drawObjSvg(obj) {
 }
 
 function drawNowMarker() {
-    var startingX = 156400 / nodeSizeScalingFactor;
+    var startingX = 683400 / nodeSizeScalingFactor;
     var width = 100;
     var height = 50;
 
@@ -271,7 +271,7 @@ function drawPathBetweenNodes(parent, child, windowGroup, mode) {
 
 /**
  * Create an SVG object that contains a rectangle and text for a page node
- * @Param: Tree object to be drawn
+ * @Param: Tree object to be drawn  
  * @Return: SVG Element
  * @Author: Tony Grosinger
  */
@@ -282,6 +282,7 @@ function createSvgNode(obj) {
     newNode.setAttribute('class', 'site');
     newNode.setAttribute("id", "group_" + obj.deviceGuid + "_" + obj.windowId + "_" + obj.tabId + "_" + obj.pageOpenTime);
     newNode.addEventListener("click", function() {collapseParent(obj.key);});
+    newNode.addEventListener("mouseover", function () {createSVGTooltip(obj);});
 
     // Create a clipping mask
     var $newNodeMask = $('\
@@ -309,6 +310,35 @@ function createSvgNode(obj) {
     newNode.appendChild(textNode);
 
     return newNode;
+}
+
+/**
+ * Create a SVG object that contains a rectangle and text for a tooltip.
+ * @Param: Node to attach tooltip to.
+ * @Return: Updated Child
+ * @Author: Chris Gilbert
+ */
+function createSVGTooltip(obj) {
+    // Create a new group
+    var newNode = document.createElementNS("http://www.w3.org/2000/svg", "g");
+    newNode.setAttribute("transform", "translate(" + obj.width/2 + "," + (obj.y + 10) + ")");
+
+    // Create the tooltip square
+    var newNodeRect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+    newNodeRect.setAttribute("height", "50");
+    newNodeRect.setAttribute("width", obj.width);
+    newNodeRect.setAttribute("fill", "red");
+
+    // Create the text for the tooltip
+    var textNode = document.createElementNS("http://www.w3.org/2000/svg", "text");
+    var tspan = document.createElementNS("http://www.w3.org/2000/svg", "tspan");
+    textNode.setAttributeNS("http://www.w3.org/XML/1998/namespace", "xml:space","preserve");
+    textNode.setAttribute("y", "30");
+    var myText = document.createTextNode(obj.pageUrl + obj.pageOpenTime);
+    tspan.appendChild(myText);
+    textNode.appendChild(tspan);
+    newNode.appendChild(newNodeRect);
+    newNode.appendChild(textNode);
 }
 
 /**
