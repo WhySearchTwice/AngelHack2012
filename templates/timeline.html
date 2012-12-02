@@ -4,12 +4,21 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <script src="/static/javascript/history.js"></script>
     <style>
-        .branch {
+        .big {
+			width: 200px;
+			height: 50px;
+		}
+
+		.branch {
             float: left;
             clear: both;
             overflow: hidden;
             position: relative;
         }
+
+		.mfreq {
+			background-color: rgb(255,0,0); opacity: 0.5;
+		}
 
         .stem {
             float: left;
@@ -18,17 +27,20 @@
         }
 
         .site {
-            background: #333;
+            background: #49AFCD;
             padding: 5px;
             float: left;
+			border: 2px solid gray;
+			text-align: center;
         }
+
     </style>
 </head>
 <body>
     <div id="timeline" class="branch">
-        <div class="site">Reddit.com</div>
+        <div class="site big">Reddit.com</div>
         <div class="stem">
-            <div class="site">Digg.com</div>
+            <div class="site mfreq">Digg.com</div>
             <div class="branch">
                 <div class="site">Imgur 1</div>
             </div>
