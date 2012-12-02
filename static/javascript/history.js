@@ -177,7 +177,7 @@ function drawObjSvg(obj) {
 }
 
 function drawNowMarker() {
-    var startingX = 156400 / nodeSizeScalingFactor;
+    var startingX = 683400 / nodeSizeScalingFactor;
     var width = 100;
     var height = 50;
 
