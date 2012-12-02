@@ -51,11 +51,14 @@ var svg = Raphael("container", 500, 500);
 })();
 
 function addChild(parent, data, type) {
+    // Create basic site container node
     $site = $('\
         <div class="' + type + '" id="page_' + ids[data.deviceGuid + data.windowId + data.tabId + data.pageOpenTime] + '">\
             <div class="site">' + data.pageUrl + '</div>\
         </div>\
     ');
+
+    // Add extra attributes
     if (data.hasOwnProperty('parentTabId')) {
         $site.attr('parenttabid', 'num_' + data.parentTabId);
     }
@@ -64,6 +67,8 @@ function addChild(parent, data, type) {
             $site.attr(data.attrs[i], 'num_' + data[data.attrs[i]]);
         }
     }
+
+    // add node to DOM
     $(parent).append($site);
 };
 
@@ -108,17 +113,23 @@ function parseData() {
         var pageId = ids[obj.deviceGuid + obj.windowId + obj.tabId + obj.pageOpenTime] = view.idCounter;
         view.idCounter++;
 
+        // cache annoying selectors
         var windowSelector = '[windowid="num_' + obj.windowId + '"]';
         var tabSelector = '[tabid="num_' + obj.tabId + '"]';
+
         if ($(windowSelector).length == 0) {
-            obj.attrs = ['windowId', 'tabId'];
+            // window does not exist, create it
+            obj.attrs = ['windowId', 'tabId'];  // DOM attributes that should be populated
             $('#timeline').addBranch(obj);
         } else if ($(windowSelector + ' ' + tabSelector + ', ' + windowSelector + tabSelector).length == 0) {
+            // windows exists but tab does not
             obj.attrs = ['tabId'];
             $(windowSelector).addBranch(obj);
         } else {
+            // window and tab exists
             $(windowSelector + ' ' + tabSelector + ', ' + windowSelector + tabSelector).addStem(obj);
         }
+        // find existing child nodes, move them under the new node
         $('[parenttabid="num_' + obj.tabId + '"] .branch').moveInto($('#page_' + pageId));
     }
 
