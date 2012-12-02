@@ -345,7 +345,7 @@ function createSVGTooltip(obj) {
     newNode.appendChild(newNodeRect);
     newNode.appendChild(textNode);
     console.log($("group_" + obj.deviceGuid + "_" + obj.windowId + "_" + obj.tabId + "_" + obj.pageOpenTime));
-    $("group_" + obj.deviceGuid + "_" + obj.windowId + "_" + obj.tabId + "_" + obj.pageOpenTime).appendChild(newNode);
+    $("group_" + obj.deviceGuid + "_" + obj.windowId + "_" + obj.tabId + "_" + obj.pageOpenTime).append(newNode);
 }
 
 /**
