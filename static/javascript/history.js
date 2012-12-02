@@ -255,13 +255,12 @@ function createSvgNode(obj) {
     newNode.addEventListener("click", function() {collapseParent(obj.key);});
 
     // Create a clipping mask
-    var newNodeMask = document.createElementNS("http://www.w3.org/2000/svg", "mask");
-    newNodeMask.setAttribute("id", "mask_" + obj.deviceGuid + "_" + obj.windowId + "_" + obj.tabId + "_" + obj.pageOpenTime);
-    newNodeMask.setAttribute("x", obj.x);
-    newNodeMask.setAttribute("y", obj.y);
-    newNodeMask.setAttribute("width", obj.width);
-    newNodeMask.setAttribute("height", "50");
-    newNode.appendChild(newNodeMask);
+    var $newNodeMask = $('\
+        <mask x="' + obj.x + '" y="' + obj.y + '" width="' + obj.width + '" height="50">\
+            <rect x="' + obj.x + '" y="' + obj.y + '" width="' + obj.width + '" height="50" fill="white"></rect>
+        </mask>
+    ');
+    newNode.appendChild($newNodeMask[0]);
 
     // Create the Rectangle
     var newNodeRect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
