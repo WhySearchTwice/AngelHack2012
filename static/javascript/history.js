@@ -108,19 +108,17 @@ function parseData() {
         var pageId = ids[obj.deviceGuid + obj.windowId + obj.tabId + obj.pageOpenTime] = view.idCounter;
         view.idCounter++;
 
-        if ($('[windowid="num_' + obj.windowId + '"]').length == 0) {
+        var windowSelector = '[windowid="num_' + obj.windowId + '"]';
+        var tabSelector = '[tabid="num_' + obj.tabId + '"]';
+        if ($(windowSelector).length == 0) {
             obj.attrs = ['windowId', 'tabId'];
-            /*if ($('[windowid="num_' + obj.windowId + '"] [tabid="num_' + obj.tabId + '"]').length == 0) {
-                obj.attrs.push('tabId');
-            }*/
             $('#timeline').addBranch(obj);
-        } else if ($('[windowid="num_' + obj.windowId + '"] [tabid="num_' + obj.tabId + '"], [windowid="num_' + obj.windowId + '"][tabid="num_' + obj.tabId + '"]').length == 0) {
+        } else if ($(windowSelector + ' ' + tabSelector + ', ' + windowSelector + tabSelector).length == 0) {
             obj.attrs = ['tabId'];
-            $('[windowid="num_' + obj.windowId + '"]').addBranch(obj);
+            $(windowSelector).addBranch(obj);
         } else {
-            $('[windowid="num_' + obj.windowId + '"] [tabid="num_' + obj.tabId + '"], [windowid="num_' + obj.windowId + '"][tabid="num_' + obj.tabId + '"]').addStem(obj);
+            $(windowSelector + ' ' + tabSelector + ', ' + windowSelector + tabSelector).addStem(obj);
         }
-        //$('[windowid="num_' + obj.windowId + '"] [tabid="num_' + obj.tabId + '"] .branch').moveInto($('#page_' + pageId));
         $('[parenttabid="num_' + obj.tabId + '"] .branch').moveInto($('#page_' + pageId));
     }
 
