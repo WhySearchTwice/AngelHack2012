@@ -28,6 +28,7 @@ var ids = {};
 // SVG element that holds all the nodes and paths
 //var svg = Raphael("container", document.width, document.height);
 var svg = Raphael("container", 500, 500);
+var devicesSet = svg.set();
 
 /* Initialize */
 (function() {
@@ -113,11 +114,45 @@ function parseData() {
         obj.width = ((obj.pageCloseTime - obj.pageOpenTime) / 500);
         obj.key = createKey(obj);
 
-        drawObjDom(obj);
+        //drawObjDom(obj);
+        drawObjSvg(obj);
     }
 
     // Erase pages so it can be reused
     pages = null;
+}
+
+/**
+ * Draw the tree object in the dom using SVG and Raphael
+ * @Param: Tree object to draw
+ * @Author: Tony Grosinger
+ */
+function drawObjSvg(obj) {
+    var deviceSet = getElementWithId(devicesSet, obj.deviceGuid);
+    if(deviceSet == null) {
+        deviceSet = svg.set();
+        devicesSet.push(deviceSet);
+    }
+
+    var windowSet = getElementWithId(deviceSet, obj.windowId);
+    if(windowSet == null) {
+        windowSet = svg.set();
+        deviceSet.push(windowSet);
+    }
+
+    var tabSet = getElementWithId(windowSet, obj.tabId);
+    if(tabSet == null) {
+        tabSet = svg.set();
+        windowSet.push(tabSet);
+    }
+
+    // Set X, Y, and Height based on set information
+    obj.x = 50;
+    obj.y = 50;
+    obj.height = 100;
+
+    // Create a new node in the tab set
+    drawNode(obj, tabSet);
 }
 
 /**
@@ -219,9 +254,10 @@ function parseKey(key) {
 /**
  * Draws a node on the page. Will attempt to remove any existing node with this ID prior to drawing
  * @Param: page1 Page object stored in the tree object
+ * @Param: set to add this node to (optional)
  * @Author: Tony Grosinger
  */
-function drawNode(page) {
+function drawNode(page, raphSet=null) {
     // TODO: Look into animating this node to a new location rather than removing it
 
     pageId = createKey(page);
@@ -229,6 +265,10 @@ function drawNode(page) {
 
     var newNode = svg.rect(page.x, page.y, page.width, page.height);
     newNode.id = pageId;
+
+    if(raphSet != null) {
+        raphSet.push(newNode);
+    }
 }
 
 /**
@@ -250,6 +290,23 @@ function drawConnectingPath(page1, page2) {
     // Create the path and set some metadata
     var newPath = container.path("M " + x1 + "," + y1 + " Q " + xMid + "," + yMid + " " + x2 + "," + y2);
     newPath.id = "path_" + createKey(page1) + "_" + createKey(page2);
+}
+
+/**
+ * Given a Raphael Set, find an element within it that has a given ID
+ * @Param: Set
+ * @Param: String
+ * @Return: Raphael Element or null
+ * @Author: Tony Grosinger
+ */
+function getElementWithId(set, id) {
+    for(var index in set.items) {
+        var object = set.items[index];
+        if(object.id == id) {
+            return object
+        }
+    }
+    return null;
 }
 
 /**
