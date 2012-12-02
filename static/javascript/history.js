@@ -360,7 +360,7 @@ function createSVGTooltip(obj, x, y) {
     // Format pageURL to fit a set size.
     var currenturl = obj.pageUrl;
     if (currenturl.length > 20) {
-        currenturl = currenturl.substring(19) + '...';
+        currenturl = currenturl.substring(0, 19) + '...';
     }
 
     var myText = document.createTextNode(currenturl + ' accessed on ' + formattedTimeStart + ' until ' + formattedTimeClose);
