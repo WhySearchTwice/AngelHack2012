@@ -109,7 +109,24 @@ function parseData() {
         console.log("Saving page");
         tab.pages[obj.pageOpenTime] = obj;
 
-        // Register page and create ID
+        // Create a little metadata about the page
+        obj.width = ((obj.pageCloseTime - obj.pageOpenTime) / 500);
+        obj.key = createKey(obj);
+
+        drawObjDom(obj);
+    }
+
+    // Erase pages so it can be reused
+    pages = null;
+}
+
+/**
+ * Draw the tree object in the dom using divs
+ * @Param: Tree object to draw
+ * @Author: Ansel Santosa
+ */
+function drawObjDom(obj) {
+    // Register page and create ID
         var pageId = ids[obj.deviceGuid + obj.windowId + obj.tabId + obj.pageOpenTime] = view.idCounter;
         view.idCounter++;
 
@@ -136,10 +153,6 @@ function parseData() {
         }
         // find existing child nodes, move them under the new node
         $('[parenttabid="num_' + obj.tabId + '"] .branch').moveInto($('#page_' + pageId));
-    }
-
-    // Erase pages so it can be reused
-    pages = null;
 }
 
 /**
@@ -149,7 +162,7 @@ function parseData() {
  * @Author: Tony Grosinger
  */
 function createKey(page) {
-    return obj.deviceGuid + obj.windowId + obj.tabId + obj.pageOpenTime;
+    return obj.key || obj.deviceGuid + obj.windowId + obj.tabId + obj.pageOpenTime;
 }
 
 /**
