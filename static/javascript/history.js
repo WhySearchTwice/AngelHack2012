@@ -22,54 +22,17 @@ var view = {
     idCounter: 0
 };
 
-var pageStartTime = 1352957091993;
-var nodeSizeScalingFactor = 200;
+var pageStartTime = 1352957091993; // Yea this is hard coded for now
+var nodeSizeScalingFactor = 200; // This is what the time difference in ms is divided by to get pixels
 
 // Map of generated keys to an id used on the page
 var ids = {};
 
 /* Initialize */
 (function() {
-    $.fn.moveInto = function(parent) {
-        $(parent).append($(this).detach());
-        return this;
-    };
-
-    $.fn.addStem = function(data) {
-        addChild(this, data, 'stem');
-        return this;
-    }
-
-    $.fn.addBranch = function(data) {
-        addChild(this, data, 'branch');
-        return this;
-    }
-
     // Load the test data
     testGet('multiWindow.json');
 })();
-
-function addChild(parent, data, type) {
-    // Create basic site container node
-    $site = $('\
-        <div class="' + type + '" id="page_' + ids[data.deviceGuid + data.windowId + data.tabId + data.pageOpenTime] + '">\
-            <div class="site">' + data.pageUrl + '</div>\
-        </div>\
-    ');
-
-    // Add extra attributes
-    if (data.hasOwnProperty('parentTabId')) {
-        $site.attr('parenttabid', 'num_' + data.parentTabId);
-    }
-    if (data.hasOwnProperty('attrs')) {
-        for (var i = 0, l = data.attrs.length; i < l; i++) {
-            $site.attr(data.attrs[i], 'num_' + data[data.attrs[i]]);
-        }
-    }
-
-    // add node to DOM
-    $(parent).append($site);
-};
 
 /**
  * Parse the data retrieved from the get request and sort it into the tree object.
@@ -288,6 +251,7 @@ function createSvgNode(obj) {
     // Create a wrapper object
     var newNode = document.createElementNS("http://www.w3.org/2000/svg", "g");
     newNode.setAttribute("transform", "translate(" + obj.x + "," + obj.y + ")");
+    newNode.setAttribute("id", "group_" + obj.deviceGuid + obj.windowId + obj.tabId + obj.pageOpenTime);
     newNode.addEventListener("click", function() {collapseParent(obj.key);});
 
     // Create the Rectangle
@@ -346,41 +310,6 @@ function collapseParent(parentKey) {
 
     // Redraw the graphic
     redraw();
-}
-
-/**
- * Draw the tree object in the dom using divs
- * @Param: Tree object to draw
- * @Author: Ansel Santosa
- */
-function drawObjDom(obj) {
-    // Register page and create ID
-        var pageId = ids[obj.deviceGuid + obj.windowId + obj.tabId + obj.pageOpenTime] = view.idCounter;
-        view.idCounter++;
-
-        // cache annoying selectors
-        var windowSelector = '[windowid="num_' + obj.windowId + '"]';
-        var tabSelector = '[tabid="num_' + obj.tabId + '"]';
-        var parentTabSelector = '[tabid="num_' + obj.parentTabId + '"]';
-        obj.attrs = ['tabId']; // extra DOM attributes that should be populated
-
-        if ($(windowSelector + ' ' + parentTabSelector + ', ' + windowSelector + parentTabSelector).length != 0) {
-            // parent of page is already created, add it
-            $(windowSelector + ' ' + parentTabSelector + ', ' + windowSelector + parentTabSelector).last().addBranch(obj);
-        } else if ($(windowSelector).length == 0) {
-            // window does not exist, create it
-            obj.attrs.push('windowId');
-            $('#timeline').addBranch(obj);
-        } else if ($(windowSelector + ' ' + tabSelector + ', ' + windowSelector + tabSelector).length == 0) {
-            // windows exists but tab does not
-            obj.attrs = ['tabId'];
-            $(windowSelector).addBranch(obj);
-        } else {
-            // window and tab exists
-            $(windowSelector + ' ' + tabSelector + ', ' + windowSelector + tabSelector).addStem(obj);
-        }
-        // find existing child nodes, move them under the new node
-        $('[parenttabid="num_' + obj.tabId + '"] .branch').moveInto($('#page_' + pageId));
 }
 
 /**
@@ -444,23 +373,6 @@ function parseKey(key) {
     }
 
     // Nothing was found, sad day
-    return null;
-}
-
-/**
- * Given a Raphael Set, find an element within it that has a given ID
- * @Param: Set
- * @Param: String
- * @Return: Raphael Element or null
- * @Author: Tony Grosinger
- */
-function getElementWithId(set, id) {
-    for(var index in set.items) {
-        var object = set.items[index];
-        if(object.id == id) {
-            return object
-        }
-    }
     return null;
 }
 
