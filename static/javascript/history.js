@@ -153,6 +153,57 @@ function createKey(page) {
 }
 
 /**
+ * Takes a key and attempts to parse it against items stored in the tree
+ * @Param: Key to be parsed
+ * @Return: Object from the tree or null
+ * @Author: Tony Grosinger
+ */
+function parseKey(key) {
+    for(var deviceGuid in tree.devices) {
+        if(key.indexOf(deviceGuid) != 0) {
+            // Not found here, try the next one
+            continue;
+        }
+
+        // Remove the device guid from the key, then search for the window
+        key = key.substring(deviceGuid.length);
+
+        for(var windowId in tree.devices[deviceGuid].windows) {
+            if(key.indexOf(windowId) != 0) {
+                // Not found here, try the next one
+                continue;
+            }
+
+            // Remove the windowId from the key, then search for the tab
+            key = key.substring(windowId.length);
+
+            for(var tabId in tree.devices[deviceGuid].windows[windowId]) {
+                if(key.indexOf(tabId) != 0) {
+                    // Not found here, try the next one
+                    continue;
+                }
+
+                // Remove the tabId from the key, then search for the page
+                key = key.substring(tabId.length);
+
+                for(var pageOpenTime in tree.devices[deviceGuid].windows[windowId].tabs[tabId]) {
+                    if(key.indexOf(pageOpenTime) != 0) {
+                        // Not found here, try the next one
+                        continue;
+                    }
+
+                    // We found it! Phew
+                    return tree.devices[deviceGuid].windows[windowId].tabs[tabId].pages[pageOpenTime];
+                }
+            }
+        }
+    }
+
+    // Nothing was found, sad day
+    return null;
+}
+
+/**
  * Draws a node on the page. Will attempt to remove any existing node with this ID prior to drawing
  * @Param: page1 Page object stored in the tree object
  * @Author: Tony Grosinger
