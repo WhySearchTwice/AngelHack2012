@@ -55,6 +55,9 @@ function parseData() {
         console.log("Saving page");
         tab.pages[obj.pageOpenTime] = obj;
     }
+
+    // Erase pages so it can be reused
+    pages = null;
 }
 
 /**
