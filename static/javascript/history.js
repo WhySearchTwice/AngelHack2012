@@ -109,7 +109,7 @@ function drawObjSvg(obj) {
     }
 
     // Attempt to get the group for this window
-    var windowGroupId = "group_" + obj.deviceGuid + obj.windowId;
+    var windowGroupId = "group_" + obj.deviceGuid + "_" + obj.windowId;
     var windowGroup = document.getElementById(windowGroupId);
 
     // If the window group is null, create it
@@ -251,7 +251,7 @@ function createSvgNode(obj) {
     // Create a wrapper object
     var newNode = document.createElementNS("http://www.w3.org/2000/svg", "g");
     newNode.setAttribute("transform", "translate(" + obj.x + "," + obj.y + ")");
-    newNode.setAttribute("id", "group_" + obj.deviceGuid + obj.windowId + obj.tabId + obj.pageOpenTime);
+    newNode.setAttribute("id", "group_" + obj.deviceGuid + "_" + obj.windowId + "_" + obj.tabId + "_" + obj.pageOpenTime);
     newNode.addEventListener("click", function() {collapseParent(obj.key);});
 
     // Create the Rectangle
