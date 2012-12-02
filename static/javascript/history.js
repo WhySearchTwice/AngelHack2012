@@ -130,18 +130,21 @@ function parseData() {
 function drawObjSvg(obj) {
     var deviceSet = getElementWithId(devicesSet, obj.deviceGuid);
     if(deviceSet == null) {
+        console.log("Creating a new deviceSet");
         deviceSet = svg.set();
         devicesSet.push(deviceSet);
     }
 
     var windowSet = getElementWithId(deviceSet, obj.windowId);
     if(windowSet == null) {
+        console.log("Creating a new windowSet");
         windowSet = svg.set();
         deviceSet.push(windowSet);
     }
 
     var tabSet = getElementWithId(windowSet, obj.tabId);
     if(tabSet == null) {
+        console.log("Creating a new tabSet");
         tabSet = svg.set();
         windowSet.push(tabSet);
     }
