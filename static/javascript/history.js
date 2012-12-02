@@ -282,7 +282,7 @@ function createSvgNode(obj) {
     newNode.setAttribute("transform", "translate(" + obj.x + "," + obj.y + ")");
     newNode.setAttribute('class', 'site');
     newNode.setAttribute("id", "group_" + obj.deviceGuid + "_" + obj.windowId + "_" + obj.tabId + "_" + obj.pageOpenTime);
-    newNode.addEventListener("click", function() {collapseParent(obj.key);});
+
     newNode.addEventListener("mouseover", function (e) {createSVGTooltip(obj, e.pageX, e.pageY);});
     newNode.addEventListener("mouseout", function() {$('#tooltip').remove();});
 
@@ -301,13 +301,15 @@ function createSvgNode(obj) {
     newNodeRect.setAttribute("rx", '4');
     newNodeRect.setAttribute('style', 'fill:url(#siteBackground)')
     newNode.appendChild(newNodeRect);
+    newNodeRect.addEventListener("click", function() {collapseParent(obj.key);});
 
     var link = document.createElementNS("http://www.w3.org/2000/svg", "a");
     var textNode = document.createElementNS("http://www.w3.org/2000/svg", "text");
     link.setAttribute('xlink:href', obj.pageUrl);
     textNode.setAttributeNS("http://www.w3.org/XML/1998/namespace", "xml:space","preserve");
-    textNode.setAttribute("y", "30");
-    var myText = document.createTextNode(obj.pageUrl + obj.pageOpenTime);
+    textNode.setAttribute("y", "20");
+    textNode.setAttribute("x", "10");
+    var myText = document.createTextNode(obj.title);
     textNode.appendChild(myText);
     link.appendChild(textNode);
     newNode.appendChild(newNodeRect);
