@@ -340,8 +340,14 @@ function createSVGTooltip(obj, x, y) {
     var textNode = document.createElementNS("http://www.w3.org/2000/svg", "text");
     var tspan = document.createElementNS("http://www.w3.org/2000/svg", "tspan");
     textNode.setAttributeNS("http://www.w3.org/XML/1998/namespace", "xml:space","preserve");
+    textNode.setAttribute("x", "10");
     textNode.setAttribute("y", "30");
-    var myText = document.createTextNode(obj.pageUrl + obj.pageOpenTime);
+    var date = new Date(obj.pageOpenTime*1000);
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+    var seconds = date.getSeconds();
+    var formattedTime = hours + ':' + minutes + ':' + seconds;
+    var myText = document.createTextNode(obj.pageUrl + ' on ' + formattedTime);
     tspan.appendChild(myText);
     textNode.appendChild(tspan);
     newNode.appendChild(newNodeRect);
