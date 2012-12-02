@@ -159,6 +159,7 @@ function drawObjSvg(obj) {
             continue;
         }
         var page = tree.devices[obj.deviceGuid].windows[obj.windowId].tabs[obj.tabId].pages[pageOpenTime];
+        console.log(page);
         xOffset = xOffset + page.width;
     }
 
