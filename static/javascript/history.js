@@ -355,11 +355,13 @@ function createKey(page) {
  * @Author: Tony Grosinger
  */
 function parseKey(key) {
+    console.log(key);
     for(var deviceGuid in tree.devices) {
         if(key.indexOf(deviceGuid) != 0) {
             // Not found here, try the next one
             continue;
         }
+        console.log(Found the deviceGuid);
 
         // Remove the device guid from the key, then search for the window
         key = key.substring(deviceGuid.length);
@@ -369,6 +371,7 @@ function parseKey(key) {
                 // Not found here, try the next one
                 continue;
             }
+            console.log(Found the windowId);
 
             // Remove the windowId from the key, then search for the tab
             key = key.substring(windowId.length);
@@ -378,6 +381,7 @@ function parseKey(key) {
                     // Not found here, try the next one
                     continue;
                 }
+                console.log(Found the tabId);
 
                 // Remove the tabId from the key, then search for the page
                 key = key.substring(tabId.length);
