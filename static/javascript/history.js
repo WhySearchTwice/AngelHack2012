@@ -162,7 +162,7 @@ function drawObjDom(obj) {
  * @Author: Tony Grosinger
  */
 function createKey(page) {
-    return page.key || obj.deviceGuid + obj.windowId + obj.tabId + obj.pageOpenTime;
+    return page.key || page.deviceGuid + page.windowId + page.tabId + page.pageOpenTime;
 }
 
 /**
