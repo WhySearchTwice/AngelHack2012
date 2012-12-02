@@ -46,14 +46,14 @@ function parseData() {
         var device = tree.getDevice(obj.deviceGuid);
         if(device == null) {
             tree.devices[obj.deviceGuid] = {windows: {}};
-            device = tree.getDevice(obj.deviceguid);
+            device = tree.getDevice(obj.deviceGuid);
         }
 
         // Ensure window exists
         console.log("Retrieving window");
         var window = tree.getWindow(obj.deviceGuid, obj.windowId);
         if(window == null) {
-            device.windows[obj.windowId] = {tabs:{}};
+            device.windows[obj.windowId] = {tabs: {}};
             window = tree.getWindow(obj.deviceGuid, obj.windowId);
         }
 
@@ -66,7 +66,6 @@ function parseData() {
         }
 
         // Create the page in the tab
-        // TODO: This might be cleared whenever the pages variable is reset
         console.log("Saving page");
         tab.pages[obj.pageOpenTime] = obj;
     }
@@ -109,7 +108,7 @@ function treeGetTab(deviceGuid, windowId, tabId) {
         return null;
     }
 
-    if (this.getWindow(windowId) == null) {
+    if (this.getWindow(deviceGuid, windowId) == null) {
         console.error('Window does not exist');
         return null;
     }
