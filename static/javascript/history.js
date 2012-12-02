@@ -256,30 +256,31 @@ function createSvgNode(obj) {
 
     // Create a clipping mask
     var newNodeMask = document.createElementNS("http://www.w3.org/2000/svg", "mask");
-    newNodeMask.setAttribute("maskUnits", "userSpaceOnUse");
+    newNodeMask.setAttribute("id", "mask_" + obj.deviceGuid + "_" + obj.windowId + "_" + obj.tabId + "_" + obj.pageOpenTime);
     newNodeMask.setAttribute("x", obj.x);
     newNodeMask.setAttribute("y", obj.y);
     newNodeMask.setAttribute("width", obj.width);
     newNodeMask.setAttribute("height", "50");
+    newNodeMask.setAttribute("id", "50");
+    newNode.appendChild(newNodeMask);
 
     // Create the Rectangle
     var newNodeRect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
     newNodeRect.setAttribute("height", "50");
     newNodeRect.setAttribute("width", obj.width);
     newNodeRect.setAttribute("fill", "red");
-    newNodeMask.appendChild(newNodeRect);
+    newNode.appendChild(newNodeRect);
 
     // Create the Text
     var textNode = document.createElementNS("http://www.w3.org/2000/svg", "text");
     var tspan = document.createElementNS("http://www.w3.org/2000/svg", "tspan");
     textNode.setAttributeNS("http://www.w3.org/XML/1998/namespace", "xml:space","preserve");
     textNode.setAttribute("y", "30");
+    textNode.setAttribute("mask", "url(#mask_" + obj.deviceGuid + "_" + obj.windowId + "_" + obj.tabId + "_" + obj.pageOpenTime + ")");
     var myText = document.createTextNode(obj.pageUrl);
     tspan.appendChild(myText);
     textNode.appendChild(tspan);
-    newNodeMask.appendChild(textNode);
-
-    newNode.appendChild(newNodeMask);
+    newNode.appendChild(textNode);
 
     return newNode;
 }
