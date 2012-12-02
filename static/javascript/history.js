@@ -290,12 +290,20 @@ function createSvgNode(obj) {
     newNode.setAttribute("transform", "translate(" + obj.x + "," + obj.y + ")");
     newNode.addEventListener("click", function() {collapseParent(obj.key);});
 
+    // Create a clipping mask
+    var newNodeMask = document.createElementNS("http://www.w3.org/2000/svg", "mask");
+    newNodeMask.setAttribute("maskUnits", "userSpaceOnUse");
+    newNodeMask.setAttribute("x", obj.x);
+    newNodeMask.setAttribute("y", obj.y);
+    newNodeMask.setAttribute("width", obj.width);
+    newNodeMask.setAttribute("height", "50");
+
     // Create the Rectangle
     var newNodeRect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
     newNodeRect.setAttribute("height", "50");
     newNodeRect.setAttribute("width", obj.width);
     newNodeRect.setAttribute("fill", "red");
-    newNode.appendChild(newNodeRect);
+    newNodeMask.appendChild(newNodeRect);
 
     // Create the Text
     var textNode = document.createElementNS("http://www.w3.org/2000/svg", "text");
@@ -305,7 +313,9 @@ function createSvgNode(obj) {
     var myText = document.createTextNode(obj.pageUrl);
     tspan.appendChild(myText);
     textNode.appendChild(tspan);
-    newNode.appendChild(textNode);
+    newNodeMask.appendChild(textNode);
+
+    newNode.appendChild(newNodeMask);
 
     return newNode;
 }
