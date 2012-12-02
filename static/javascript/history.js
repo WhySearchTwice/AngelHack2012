@@ -143,9 +143,6 @@ function drawObjSvg(obj) {
     textNode.appendChild(tspan);
     newNode.appendChild(textNode);
 
-    // Save a reference to this node, because it just might be handy
-    obj.node = newNode;
-
     // Attempt to get the group for this device
     var deviceGroupId = "group_" + obj.deviceGuid;
     var deviceGroup = document.getElementById(deviceGroupId);
@@ -196,16 +193,57 @@ function drawObjSvg(obj) {
             }
         }
         if(parentPage != null) {
-            // Draw the line between these two nodes
-            var newPath = document.createElementNS("http://www.w3.org/2000/svg", "path");
-            newPath.setAttribute("d", "M" + obj.x + "," + (obj.y + 25) + " Q" + parentPage.x + "," + obj.y + " " + parentPage.x + "," + (parentPage.y + 50));
-            newPath.setAttribute("stroke", "black");
-            newPath.setAttribute("stroke-width", 3);
-            newPath.setAttribute("opacity", 1);
-            newPath.setAttribute("fill", "none");
-            windowGroup.appendChild(newPath);
+            drawPathBetweenNodes(parentPage, obj, windowGroup);
         }
     }
+}
+
+/**
+ * Redraw the current viewport, starts by clearing all current contents
+ * @Author: Tony Grosinger
+ */
+function redraw() {
+    // Clear all contents
+
+    // For each device
+
+    // For each window
+
+    // For each tab
+
+    // For each page
+
+    // Draw the page
+
+}
+
+/**
+ * Draws a line between a parent node and a child node. Will add it to a group
+ * so the transform can be applied
+ * @Param: parent, child Objects from the tree to be connected.
+ * @Param: windowGroup SVGGroup object to add element to
+ * @Author: Tony Grosinger
+ */
+function drawPathBetweenNodes(parent, child, windowGroup) {
+    var x1 = parent.x;
+    var y1 = parent.y + 50;
+
+    var x2 = child.x;
+    var y2 = child.y + 25;
+
+    var xMid = x1;
+    var yMid = y2;
+
+    // Create the actual shape
+    var newPath = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    newPath.setAttribute("d", "M" + x1 + "," + y1 + " Q" + xMid + "," + yMid + " " + x2 + "," + y2);
+    newPath.setAttribute("stroke", "black");
+    newPath.setAttribute("stroke-width", 3);
+    newPath.setAttribute("opacity", 1);
+    newPath.setAttribute("fill", "none");
+
+    // Add it to the provided windowGroup
+    windowGroup.appendChild(newPath);
 }
 
 /**
