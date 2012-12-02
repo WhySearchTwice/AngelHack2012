@@ -10,7 +10,7 @@ var pages = {};
 (function() {
     fetchData();
     testGet();
-    paseeData();
+    parseData();
 })();
 
 $.fn.createChild = function(data) {
@@ -118,9 +118,14 @@ function get(email) {
 function testGet() {
     $.ajax({
         type: 'GET',
-        url: '/static/sampledata/simplereddit.json',
+        url: '/static/sampleData/simpleReddit.json',
         dataType : 'json'
-    }).complete(function(data) {
-       pages = data;
-    });
+    })
+        .success(function(data) {
+           pages = data;
+        })
+        .error(function(data) {
+            console.error(data);
+        })
+    ;
 }
