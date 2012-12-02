@@ -22,6 +22,8 @@ var view = {
     idCounter: 0
 };
 
+var yHeight = 10;
+
 // Map of generated keys to an id used on the page
 var ids = {};
 
@@ -157,6 +159,8 @@ function drawObjSvg(obj) {
 
 
 
+
+
     // Add the xOffset to the x value of the parent
     if(leftmostPage != null) {
         xOffset = xOffset + leftmostPage.x;
@@ -171,7 +175,8 @@ function drawObjSvg(obj) {
 
     // Set X, Y, and Height based on set information
     obj.height = 100;
-    obj.y = 100;
+    obj.y = yHeight;
+    yHeight += 50;
 
     // Create a new node
     var newNode = drawNode(obj);
