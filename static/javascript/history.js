@@ -386,7 +386,7 @@ function parseKey(key) {
                 // Remove the tabId from the key, then search for the page
                 key = key.substring(tabId.length);
 
-                for(var pageOpenTime in tree.devices[deviceGuid].windows[windowId].tabs[tabId]) {
+                for(var pageOpenTime in tree.devices[deviceGuid].windows[windowId].tabs[tabId].pages) {
                     if(key.indexOf(pageOpenTime) != 0) {
                         // Not found here, try the next one
                         continue;
