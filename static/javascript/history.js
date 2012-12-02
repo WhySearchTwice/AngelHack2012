@@ -128,7 +128,7 @@ function parseData() {
 function drawObjSvg(obj) {
     // Create a rectangle to represent this element
     var newNode = document.createElementNS("http://www.w3.org/2000/svg", "g");
-    newNode.setAttribute("x", obj.x);
+    newNode.setAttribute("transform", "translate(" + obj.x + ",0)");
     var newNodeRect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
     newNodeRect.setAttribute("height", "50");
     newNodeRect.setAttribute("width", obj.width);
@@ -141,7 +141,6 @@ function drawObjSvg(obj) {
     tspan.appendChild(myText);
     textNode.appendChild(tspan);
     newNode.appendChild(textNode);
-
 
     // Attempt to get the group for this tab
     var tabGroupId = "group_" + obj.deviceGuid + obj.windowId + obj.tabId;
