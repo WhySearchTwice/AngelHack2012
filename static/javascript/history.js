@@ -20,20 +20,23 @@ var ids = {};
 
 /* Initialize */
 (function() {
+    $.fn.moveInto = function(parent) {
+        $(parent).appendChild($(this).detach());
+        return this;
+    };
+
+    $.fn.addStem = function(data) {
+        addChild(this, data, 'stem');
+        return this;
+    }
+
+    $.fn.addBranch = function(data) {
+        addChild(this, data, 'branch');
+        return this;
+    }
+
     testGet('simpleReddit.json');
 })();
-
-$.fn.moveInto = function(parent) {
-    $(parent).appendChild($(this).detach());
-};
-
-$.fn.addStem = function(data) {
-    addChild(this, data, 'stem');
-}
-
-$.fn.addBranch = function(data) {
-    addChild(this, data, 'branch');
-}
 
 function addChild(parent, data, type) {
     $site = $('\
