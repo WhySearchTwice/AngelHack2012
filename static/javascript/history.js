@@ -243,17 +243,17 @@ function drawPathBetweenNodes(parent, child, windowGroup, mode) {
     if(mode != null && mode == "inLine") {
         // A node progressing down the history of a tab
         x1 = parent.x + parent.width;
-        y1 = parent.y + 25;
+        y1 = parent.y + 15;
 
         x2 = child.x;
         y2 = y1;
     } else {
         // A child node
         x1 = parent.x;
-        y1 = parent.y + 40;
+        y1 = parent.y + 30;
 
         x2 = child.x;
-        y2 = child.y + 25;
+        y2 = child.y + 15;
     }
 
 
