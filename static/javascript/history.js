@@ -117,7 +117,7 @@ function drawObjSvg(obj) {
     // If the window group is null, create it
     if(windowGroup == null) {
         windowGroup = document.createElementNS("http://www.w3.org/2000/svg", "g");
-
+/*
         // If there is already a window in this device, make the top of this window at the bottom of the last one
         var distanceToOffset = 0;
         for(var index in tree.devices[obj.deviceGuid].windows) {
@@ -127,7 +127,7 @@ function drawObjSvg(obj) {
             distanceToOffset += tempWindow.maxYOffset;
         }
         windowGroup.setAttribute("transform", "translate(0, " + distanceToOffset + ")");
-
+*/
         windowGroup.setAttribute("id", windowGroupId);
         deviceGroup.appendChild(windowGroup);
     }
