@@ -129,7 +129,6 @@ function parseData() {
 function drawObjSvg(obj) {
     // Create a rectangle to represent this element
     var newNode = document.createElementNS("http://www.w3.org/2000/svg", "g");
-    newNode.setAttribute("transform", "translate(" + obj.x + ",0)");
     var newNodeRect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
     newNodeRect.setAttribute("height", "50");
     newNodeRect.setAttribute("width", obj.width);
@@ -169,22 +168,18 @@ function drawObjSvg(obj) {
         deviceGroup.appendChild(windowGroup);
     }
 
-    // Attempt to get the group for this tab
-    var tabGroupId = "group_" + obj.deviceGuid + obj.windowId + obj.tabId;
-    var tabGroup = document.getElementById(tabGroupId);
-
-    // If tab group is null, create it
-    if(tabGroup == null) {
-        tabGroup = document.createElementNS("http://www.w3.org/2000/svg", "g");
-        tabGroup.setAttribute("id", tabGroupId);
-        windowGroup.appendChild(tabGroup);
-
-        // Offset the y based on how many tabs are open in this window
-        tabGroup.setAttribute("transform", "translate(0," + 50 * windowGroup.childNodes.length + ")");
+    // Find the Y offset to apply to this node
+    var yOffset = tree.devices[obj.deviceGuid].windows[obj.windowId].tabs[obj.tabId].yOffset;
+    if(yOffset == null) {
+        yOffset = (tree.devices[obj.deviceGuid].windows[obj.windowId].maxYOffset || 0) + 50;
+        tree.devices[obj.deviceGuid].windows[obj.windowId].maxYOffset = yOffset;
+        tree.devices[obj.deviceGuid].windows[obj.windowId].tabs[obj.tabId].yOffset = yOffset;
     }
+    newNode.setAttribute("transform", "translate(" + obj.x + "," + yOffset + ")");
+    obj.y = yOffset;
 
     // Add our new page to the tab group
-    tabGroup.appendChild(newNode);
+    windowGroup.appendChild(newNode);
 
     // If our node has a parent node, draw a line between them
     if(obj.parentTabId != null) {
