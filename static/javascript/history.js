@@ -21,7 +21,7 @@ var ids = {};
 /* Initialize */
 (function() {
     $.fn.moveInto = function(parent) {
-        $(parent).appendChild($(this).detach());
+        $(parent).append($(this).detach());
         return this;
     };
 
